@@ -176,6 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        Laravolt\Indonesia\ServiceProvider::class,
 
     ],
 
@@ -193,5 +194,6 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         // ...
     ])->toArray(),
+    'Indonesia' => Laravolt\Indonesia\Facade::class,
 
 ];

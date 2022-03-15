@@ -20,6 +20,7 @@ class AdminController extends Controller
         $attandance_total = count(Attendance::whereAttendance_date(date("d-m-Y"))->get());
         $onTime_employee = count(Attendance::whereAttendance_date(date("d-m-Y"))->whereStatus('On Time')->get());
         $lateTime_employee = count(Attendance::whereAttendance_date(date("d-m-Y"))->whereStatus('Late')->get());
+
         if ($attandance_total > 0) {
             $percentageOntime = str_split(($onTime_employee / $attandance_total) * 100, 4)[0];
         } else {

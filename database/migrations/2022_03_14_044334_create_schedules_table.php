@@ -15,7 +15,19 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
+            $table->string('shift')->unique();
+            $table->time('time_in');
+            $table->time('time_out');
             $table->timestamps();
+        });
+
+        Schema::create('schedule_users', function (Blueprint $table) {
+            $table->integer('user_id')->unsigned();
+            $table->integer('schedule_id')->unsigned();
+            $table->primary(array('user_id','schedule_id'));
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');
         });
     }
 
@@ -26,6 +38,8 @@ return new class extends Migration
      */
     public function down()
     {
+        Schema::dropForeign(array('user_id', 'schedule_id'));
+        Schema::dropIfExists('schedule_users');
         Schema::dropIfExists('schedules');
     }
 };

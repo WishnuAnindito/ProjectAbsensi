@@ -1,15 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\EmployeeRecrutment;
-use App\Models\Role;
-use App\Models\Schedule;
-use App\Models\User;
-
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class EmployeeController extends Controller
+class ScheduleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,8 +14,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //Menampilkan seluurh data karyawan
-        return view('admin.employee')->with(['employees' => User::all(), 'schedules' => Schedule::all()]);
+        //
     }
 
     /**
@@ -38,31 +33,9 @@ class EmployeeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(EmployeeRecrutment $request) //Menambah Karyawan Baru
+    public function store(Request $request)
     {
-        
-        $request->validate();
-
-        $employee = new User;
-        $employee->name = $request->name;
-        $employee->email = $request->email;
-        $employee->password = bcrypt($request->password);
-        $employee->phone = $request->phone;
-        $employee->address = $request->address;
-        $employee->schedule = $request->schedule;
-        $employee->save();
-
-
-        if ($request->schedule) {
-            $schedule = Schedule::whereSlug($request->schedule)->first();
-            $employee->schedules()->attach($schedule);
-        }
-
-        $role = Role::whereSlug('emp')->first();
-
-        $employee->roles()->attach($role);
-
-        return redirect()->route('employees.index')->with('success', 'Employee Has Been Created Successfully');
+        //
     }
 
     /**

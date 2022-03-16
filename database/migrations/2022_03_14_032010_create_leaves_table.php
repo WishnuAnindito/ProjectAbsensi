@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('leaves', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->foreignId('user_id');
             $table->time('leave_time')->default(date("H:i"));
             $table->date('leave_date');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

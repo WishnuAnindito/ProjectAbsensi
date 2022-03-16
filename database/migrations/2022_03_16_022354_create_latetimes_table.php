@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('attendances', function (Blueprint $table) {
+        Schema::create('latetimes', function (Blueprint $table) {
             $table->increments('id');
             $table->foreignId('user_id');
-            $table->time('atttendance_time')->default(date("H:i"));
+            $table->time('duration');
+            $table->date('latetime_date');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropForeign(array('user_id', 'schedule_id'));
-        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('latetimes');
     }
 };

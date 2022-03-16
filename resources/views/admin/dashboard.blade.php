@@ -15,7 +15,9 @@
             <div class="col-sm-4 card-body">
               <i class="fa-solid fa-user-group fa-5x"></i>
             </div>
-            <h6 class="card-footer text-center">More Info</h6>
+            <a href="#">
+              <h6 class="card-footer text-center">More Info <i class="fa-solid fa-circle-arrow-right"></i></h6>
+            </a>
           </div>  
         </div>
       </div>
@@ -27,9 +29,11 @@
               <p class="card-text text-white">On Time Percentage</p>
             </div>
             <div class="col-sm-4 card-body">
-              <i class="fa-solid fa-chart-pie-simple"></i>
-            </div>  
-            <h6 class="card-footer text-center">More Info</h6>
+              <i class="fa-solid fa-chart-pie fa-5x"></i>
+            </div>
+            <a href="#">
+              <h6 class="card-footer text-center">More Info <i class="fa-solid fa-circle-arrow-right"></i></h6>
+            </a>  
           </div>
         </div>  
       </div>
@@ -43,7 +47,9 @@
             <div class="col-sm-4 card-body fa-4x">
               <i class="fa-solid fa-clock"></i>
             </div>
-            <h6 class="card-footer text-center mt-2">More Info</h6>
+            <a href="#">
+              <h6 class="card-footer text-center mt-2">More Info <i class="fa-solid fa-circle-arrow-right"></i></h6>
+            </a>
           </div>
         </div>  
       </div>
@@ -57,10 +63,15 @@
             <div class="col-sm-4 card-body">
               <i class="fa-solid fa-triangle-exclamation fa-5x"></i>
             </div>
-            <h6 class="card-footer text-center mt-4">More Info</h6>
+            <a href="#">
+              <h6 class="card-footer text-center mt-4">More Info <i class="fa-solid fa-circle-arrow-right"></i></h6>
+            </a>
           </div>
         </div>  
       </div>
     </div>
+  </div>
+  <div class="container">
+    <h2 class="mt-4">Monthly Attendance Report</h2>
   </div>
 @endsection

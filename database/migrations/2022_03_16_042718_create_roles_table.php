@@ -13,11 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('attendances', function (Blueprint $table) {
-            $table->increments('id');
-            $table->foreignId('user_id');
-            $table->time('atttendance_time')->default(date("H:i"));
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        Schema::create('roles', function (Blueprint $table) {
+            $table->id();
             $table->timestamps();
         });
     }
@@ -29,7 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropForeign(array('user_id', 'schedule_id'));
-        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('roles');
     }
 };

@@ -22,9 +22,8 @@ return new class extends Migration
         });
 
         Schema::create('schedule_users', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned();
-            $table->integer('schedule_id')->unsigned();
-            $table->primary(array('user_id','schedule_id'));
+            $table->foreignId('user_id');
+            $table->foreignId('schedule_id');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('schedule_id')->references('id')->on('schedules')->onDelete('cascade');

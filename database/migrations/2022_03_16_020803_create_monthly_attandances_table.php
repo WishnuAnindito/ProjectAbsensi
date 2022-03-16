@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('attendances', function (Blueprint $table) {
+        Schema::create('monthly_attandances', function (Blueprint $table) {
             $table->increments('id');
             $table->foreignId('user_id');
             $table->time('atttendance_time')->default(date("H:i"));
@@ -30,6 +30,6 @@ return new class extends Migration
     public function down()
     {
         Schema::dropForeign(array('user_id', 'schedule_id'));
-        Schema::dropIfExists('attendances');
+        Schema::dropIfExists('monthly_attandances');
     }
 };

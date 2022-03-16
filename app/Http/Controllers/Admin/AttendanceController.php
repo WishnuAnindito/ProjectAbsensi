@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AttendanceEmp;
 use App\Models\Attendance;
-// use App\Http\Requests\StoreAttendanceRequest;
-// use App\Http\Requests\UpdateAttendanceRequest;
 use App\Models\LateTime;
 use App\Models\User;
 use DateTime;

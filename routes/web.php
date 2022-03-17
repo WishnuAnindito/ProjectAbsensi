@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\Admin\AttendanceController;
+use App\Http\Controllers;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -16,14 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('admin.dashboard');
+    return view('employee.attendance', ['today' => Carbon::now()->toDateString()]);
 });
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance');
+Route::get('/attendance', [Controllers\Admin\AttendanceController::class, 'index'])->name('attendance');
 
 Auth::routes();
 

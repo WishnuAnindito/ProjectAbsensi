@@ -195,5 +195,6 @@ return [
         // ...
     ])->toArray(),
     'Indonesia' => Laravolt\Indonesia\Facade::class,
+    
 
 ];

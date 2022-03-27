@@ -30,11 +30,113 @@
             </div>
         </div>
         <h2 class="my-4">Absen Harian</h2>
-        <div class="row mb-3">
-            <label for="enddate" class="col-md-2 col-form-label">Sampai : </label>
-            <div class="col-md-2">
-                <input type="date" class="form-control" name="enddate" id="enddate" readonly value="{{$today}}">
+        <form action="">
+            @csrf
+            <h4 class="mb-3">Check In (Menuju Lokasi):</h4>
+            <div class="row mb-3">
+                <label for="check-in-date" class="col-md-2 col-form-label">Tanggal : </label>
+                <div class="col-md-2">
+                    <input type="date" class="form-control" name="check-in-date" id="check-in-date" readonly value="{{$today}}">
+                </div>
+                <label for="check-in-hour" class="col-md-1 col-form-label">Jam : </label>
+                <div class="col-md-2">
+                    <input type="time" class="form-control" name="check-in-hour" id="check-in-hour" readonly value="{{$now}}">
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" name="check-in-timezone" id="check-in-timezone">
+                        <option selected value="Asia/Jakarta">WIB</option>
+                        <option value="Asia/Ujung_Pandang">WITA</option>
+                        <option value="Asia/Jayapura">WIT</option>
+                    </select>
+                </div>
             </div>
-        </div>
+            <div class="row mb-3">
+                <label for="check-in-description" class="col-md-2 col-form-label">Keterangan : </label>
+                <div class="col-md-5">
+                    <input type="description" class="form-control" name="check-in-description" id="check-in-description">
+                </div>
+                <button type="submit" class="btn btn-success col-md-2">Check In</button>
+            </div>
+        </form>
+        <form action="">
+            @csrf
+            <h4 class="mb-3">Check Out (Tiba di Lokasi):</h4>
+            <div class="row mb-3">
+                <label for="check-out-date" class="col-md-2 col-form-label">Tanggal : </label>
+                <div class="col-md-2">
+                    <input type="date" class="form-control" name="check-out-date" id="check-out-date" readonly value="{{$today}}">
+                </div>
+                <label for="check-out-hour" class="col-md-1 col-form-label">Jam : </label>
+                <div class="col-md-2">
+                    <input type="time" class="form-control" name="check-out-hour" id="check-out-hour" readonly value="{{$now}}">
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" name="check-out-timezone" id="check-out-timezone">
+                        <option selected value="Asia/Jakarta">WIB</option>
+                        <option value="Asia/Ujung_Pandang">WITA</option>
+                        <option value="Asia/Jayapura">WIT</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="check-out-description" class="col-md-2 col-form-label">Keterangan : </label>
+                <div class="col-md-5">
+                    <input type="description" class="form-control" name="check-out-description" id="check-out-description">
+                </div>
+                <button type="submit" class="btn btn-danger col-md-2">Check Out</button>
+            </div>
+        </form>
+    </div>
+    <div class="container mt-5">
+        <h2 class="my-4">Absen Pekerjaan</h2>
+        <form action="">
+            @csrf
+            <h4 class="mb-3">Check In :</h4>
+            <div class="row mb-3">
+                <label for="check-in-hour" class="col-md-2 col-form-label">Jam : </label>
+                <div class="col-md-2">
+                    <input type="time" class="form-control" name="check-in-hour" id="check-in-hour" readonly value="{{$now}}">
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" name="check-in-timezone" id="check-in-timezone">
+                        <option selected value="Asia/Jakarta">WIB</option>
+                        <option value="Asia/Ujung_Pandang">WITA</option>
+                        <option value="Asia/Jayapura">WIT</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="check-in-description" class="col-md-2 col-form-label">Keterangan : </label>
+                <div class="col-md-5">
+                    <input type="description" class="form-control" name="check-in-description" id="check-in-description">
+                </div>
+                <button type="submit" class="btn btn-success col-md-2">Check In</button>
+            </div>
+        </form>
+        <form action="">
+            @csrf
+            <h4 class="mb-3">Check Out  :</h4>
+            <div class="row mb-3">
+                <label for="check-out-hour" class="col-md-2 col-form-label">Jam : </label>
+                <div class="col-md-2">
+                    <input type="time" class="form-control" name="check-out-hour" id="check-out-hour" readonly value="{{$now}}">
+                </div>
+                <div class="col-md-2">
+                    <select class="form-select" name="check-out-timezone" id="check-out-timezone">
+                        <option selected value="Asia/Jakarta">WIB</option>
+                        <option value="Asia/Ujung_Pandang">WITA</option>
+                        <option value="Asia/Jayapura">WIT</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="check-out-description" class="col-md-2 col-form-label">Keterangan : </label>
+                <div class="col-md-5">
+                    <input type="description" class="form-control" name="check-out-description" id="check-out-description">
+                </div>
+                <button type="submit" class="btn btn-danger col-md-2">Check Out</button>
+            </div>
+        </form>
+        <button class="btn btn-dark mt-4">Pekerjaan Baru</button>
     </div>
 @endsection

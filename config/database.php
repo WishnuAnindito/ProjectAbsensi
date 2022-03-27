@@ -46,10 +46,10 @@ return [
         'mysql' => [
             'driver' => 'mysql',
             'url' => env('DATABASE_URL'),
-            'host' => env('DB_HOST', '127.0.0.1'),
+            'host' => env('DB_HOST', '114.134.65.82'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
+            'database' => env('DB_DATABASE', 'tangara'),
+            'username' => env('DB_USERNAME', 'admin'),
             'password' => env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
@@ -61,6 +61,38 @@ return [
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
             ]) : [],
+        ],
+
+        'mysql2' => [
+            'driver' => env('DB_CONNECTION_SECOND'),
+            'host' => env('DB_HOST_SECOND', '114.134.65.82'),
+            'port' => env('DB_PORT_SECOND', '3306'),
+            'database' => env('DB_DATABASE_SECOND', 'tm_asset'),
+            'username' => env('DB_USERNAME_SECOND', 'admin'),
+            'password' => env('DB_PASSWORD_SECOND', ''),
+            'unix_socket' => '',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
+        ],
+
+        'mysql3' => [
+            'driver' => env('DB_CONNECTION_THIRD'),
+            'host' => env('DB_HOST_THIRD', '114.134.65.82'),
+            'port' => env('DB_PORT_THIRD', '3306'),
+            'database' => env('DB_DATABASE_THIRD', 'tm_app'),
+            'username' => env('DB_USERNAME_THIRD', 'admin'),
+            'password' => env('DB_PASSWORD_THIRD', ''),
+            'unix_socket' => '',
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,
         ],
 
         'pgsql' => [

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers;
+use App\Http\Controllers\Check\LoginController;
 use App\Http\Controllers\PenarikanBarang\HeaderController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -19,19 +20,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('employee.history', ['today' => Carbon::today()->toDateString(), 'now' => Carbon::now()->toTimeString()]);
+    return view('employee.attendance', ['today' => Carbon::today()->toDateString(), 'now' => Carbon::now()->toTimeString()]);
     // return DB::table('emp_person')->where('emp_id', 8)->first();
 });
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', [Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->name('login');
+Route::post('/login', [LoginController::class, 'customLogin'])->middleware('guest')->name('login');
+Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::get('/attendance', [Controllers\Admin\AttendanceController::class, 'index'])->name('attendance');
 
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/testHome', function(){
     return view('test');
 });

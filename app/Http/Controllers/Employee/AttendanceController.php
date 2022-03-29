@@ -33,10 +33,13 @@ class AttendanceController extends Controller
             'check_in' => 'required|datetime',
             'latitude' => 'string',
             'longitude' => 'string',
-
+            'address' => 'string',
+            'region' => 'string',
+            'zone_time' => 'required|not_in:0'
         ]);
 
         $emp_id = $request->emp_id;
+        $check = 
 
         $users_data = DB::connection('mysql')->table('emp_person','ep')
                     ->select(
@@ -60,7 +63,7 @@ class AttendanceController extends Controller
         DB::insert('INSERT INTO tbl_absence 
                     (abs_emp_id, abs_emp_name, abs_emp_grade, abs_emp_division, abs_emp_dept,
                     abs_emp_coach, abs_emp_manager, abs_date, abs_check_in,
-                    abs_latitude_in, abs_longitude_in, abs_address_in, abs_zone_region_in, abs_zone_in) 
+                    abs_latitude_in, abs_longitude_in, abs_address_in, abs_zone_region_in, abs_zone_time_in) 
                     VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)', 
                     [
                         $users_data->emp_id,
@@ -88,5 +91,9 @@ class AttendanceController extends Controller
     public function show($id)
     {
         //
+    }
+
+    public function update($id){
+
     }
 }

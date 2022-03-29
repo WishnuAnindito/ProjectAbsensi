@@ -55,6 +55,7 @@
                 <div class="col-md-5">
                     <input type="description" class="form-control" name="check-in-description" id="check-in-description">
                 </div>
+                <input type="hidden" value="{{$user->emp_id}}">
                 <button type="submit" id="check-in-loc-btn" class="btn btn-success col-md-2">Check In</button>
             </div>
         </form>

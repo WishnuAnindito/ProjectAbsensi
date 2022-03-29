@@ -30,7 +30,7 @@
             </div>
         </div>
         <h2 class="my-4">Absen Harian</h2>
-        <form action="">
+        <form action="" id="check-in-loc">
             @csrf
             <h4 class="mb-3">Check In (Menuju Lokasi):</h4>
             <div class="row mb-3">
@@ -55,10 +55,10 @@
                 <div class="col-md-5">
                     <input type="description" class="form-control" name="check-in-description" id="check-in-description">
                 </div>
-                <button type="submit" class="btn btn-success col-md-2">Check In</button>
+                <button type="submit" id="check-in-loc-btn" class="btn btn-success col-md-2">Check In</button>
             </div>
         </form>
-        <form action="">
+        <form action="" id="check-out-loc">
             @csrf
             <h4 class="mb-3">Check Out (Tiba di Lokasi):</h4>
             <div class="row mb-3">

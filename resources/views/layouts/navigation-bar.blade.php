@@ -5,7 +5,7 @@
       <div class="sidebar-header">
           <h3>PT. Tangara Mitrakom</h3>
       </div>
-      @if(Auth::user()->emp_grade == 99)     
+      @if($admin)     
       <ul class="list-unstyled components">
           <li class="active">
               <a href="#">Dashboard</a>
@@ -52,7 +52,6 @@
                 <div class="navbar nav mb-0">
                     <a class="nav-link dropdown-toggle text-white me-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         Admin
-                        {{Auth::user()->name}}
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                         <div>
@@ -69,7 +68,7 @@
                 </div>
             </div>
         </nav>
-        @elseif (Auth::user()->emp_grade != 0 || Auth::user()->emp_grade != 99)
+        @elseif ($user)
         <ul class="list-unstyled components">
             <li class="active">
                 <a href="#">Attendance</a>
@@ -110,7 +109,6 @@
                   <div class="navbar nav mb-0">
                       <a class="nav-link dropdown-toggle text-white me-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                           User
-                          {{Auth::user()->name}}
                       </a>
                       <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                           <div>

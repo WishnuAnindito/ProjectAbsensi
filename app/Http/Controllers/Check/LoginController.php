@@ -34,39 +34,25 @@ class LoginController extends Controller
                     ->join('tbl_users', 'ep.emp_id', '=', 'tbl_users.user_id')
                     ->where('ep.emp_email_office', 'like', $email)
                     ->where('tbl_users.user_pass', 'like',$password)
-                    ->where('emp_position.emp_status', '<=', 3)
+                    ->where('emp_position.emp_status', '<', 3)
                     ->first();
-
-        // $admin_data = DB::connection('mysql')->table('emp_person','ep')
-        //             ->select('ep.emp_id','ep.emp_email_office','tbl_users.user_pass', 'tbl_users.user_grade', 'emp_position.emp_status')
-        //             ->join('emp_position','ep.emp_id', '=', 'emp_position.emp_id')
-        //             ->join('tbl_users', 'ep.emp_id', '=', 'tbl_users.user_id')
-        //             ->where('ep.emp_email_office', 'like', $email)
-        //             ->where('tbl_users.user_pass', 'like',$password)
-        //             ->where('emp_position.emp_status', '<=', 3)
-        //             ->where('emp_position.emp_grade', 'like', "XCIX")
-        //             ->first();
 
         $admin_data = DB::connection('mysql')->table('tbl_users')
                     ->select('tbl_users.user_name','tbl_users.user_pass', 'tbl_users.user_grade', 'emp_position.emp_status')
                     ->join('emp_position','tbl_users.user_id', '=', 'emp_position.emp_id')
                     ->where('tbl_users.user_name', 'like', $email)
-                    ->where('tbl_users.user_pass', 'like',$password)
+                    ->where('tbl_users.user_pass', 'like', $password)
                     ->where('emp_position.emp_status', '<', 3)
                     ->where('tbl_users.user_grade', '=', 99)
                     ->first();
 
-        dd($admin_data);
-        // if($admin_data){
-        //     return "Sukses";
-        //     // return redirect('employee.attendance')->with('Success', 'Kamu berhasil login!!!');
-        // }else if($admin_data){
-        //     // return redirect('admin.dashboard')->with('Success', 'Selamat Datang Admin!!!');
-        //     return "sukses admin";
-        // }else{
-        //     // return redirect()->back()->withErrors(['ErrorAccount', 'Akun tidak sesuai!!!']);
-        //     return "gagal login";
-        // }
+        if($users_data){
+            return view('employee.attendance', ['users' => $users_data]);
+        }else if($admin_data){
+            return view('admin.dashboard', ['admin' => $admin_data]);
+        }else{
+            return redirect()->back()->withErrors(['ErrorAccount', 'Akun tidak sesuai!!!']);
+        }
     }
     
     public function logout(){

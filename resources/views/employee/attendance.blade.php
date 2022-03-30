@@ -50,13 +50,14 @@
                     </select>
                 </div>
             </div>
+            <input type="hidden" id="check-in-location" value="">
             <div class="row mb-3">
                 <label for="check-in-description" class="col-md-2 col-form-label">Keterangan : </label>
                 <div class="col-md-5">
                     <input type="description" class="form-control" name="check-in-description" id="check-in-description">
                 </div>
-                <input type="hidden" value="{{$user->emp_id}}">
-                <button type="submit" id="check-in-loc-btn" class="btn btn-success col-md-2">Check In</button>
+                {{-- <input type="hidden" value="{{$user->emp_id}}"> --}}
+                <button type="submit" id="check-in-loc-btn" class="btn btn-success col-md-2" onclick="toggleFormElements(true)">Check In</button>
             </div>
         </form>
         <form action="" id="check-out-loc">
@@ -72,7 +73,7 @@
                     <input type="time" class="form-control" name="check-out-hour" id="check-out-hour" readonly value="{{$now}}">
                 </div>
                 <div class="col-md-2">
-                    <select class="form-select" name="check-out-timezone" id="check-out-timezone">
+                    <select class="form-select" name="check-out-timezone" id="check-out-timezone" disabled>
                         <option selected value="Asia/Jakarta">WIB</option>
                         <option value="Asia/Ujung_Pandang">WITA</option>
                         <option value="Asia/Jayapura">WIT</option>
@@ -82,9 +83,9 @@
             <div class="row mb-3">
                 <label for="check-out-description" class="col-md-2 col-form-label">Keterangan : </label>
                 <div class="col-md-5">
-                    <input type="description" class="form-control" name="check-out-description" id="check-out-description">
+                    <input type="description" class="form-control" name="check-out-description" id="check-out-description" disabled>
                 </div>
-                <button type="submit" class="btn btn-danger col-md-2">Check Out</button>
+                <button type="submit" class="btn btn-danger col-md-2" disabled>Check Out</button>
             </div>
         </form>
     </div>

@@ -4,33 +4,24 @@ namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class AttendanceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         return view('employee.attendance', ['today' => Carbon::today()->toDateString(), 'now' => Carbon::now()->toTimeString()]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+  
+    public function checkInStore(Request $request)
     {
         $request->validate([
             'emp_id' => 'integer',
-            'check_in' => 'required|datetime',
+            'date' => 'required|date',
+            'check_in' => 'required|time',
+            'reason' => 'nullable|string',
             'latitude' => 'string',
             'longitude' => 'string',
             'address' => 'string',
@@ -39,61 +30,99 @@ class AttendanceController extends Controller
         ]);
 
         $emp_id = $request->emp_id;
-        $check = 
+        $current_date = $request->date;
+        $absen = $request->check_in;
+        $latitude = $request->latitude;
+        $longitude = $request->longitude;
+        $address = $request->address;
+        $region = $request->region;
+        $zone_time = $request->zone_time;
 
-        $users_data = DB::connection('mysql')->table('emp_person','ep')
-                    ->select(
-                        'ep.emp_id',
-                        'ep.emp_full_name',
-                        'tbl_users.emp_grade',
-                        'emp_position.emp_division',
-                        'emp_position.emp_department',
-                        'emp_coach.emp_coach',
-                        'emp_coach.emp_manager',
-                        )
-                    ->join('emp_position','ep.emp_id', '=', 'emp_position.emp_id')
-                    ->join('tbl_users', 'ep.emp_id', '=', 'tbl_users.user_id')
-                    ->where('ep.emp_id', '=', $emp_id)
-                    ->get();
-
-        $current_date = Carbon::now()->toDateString();
-        $current_hour = Carbon::now()->toTimeString();
-
+        $insert_data = DB::insert('INSERT INTO abs_in
+                                (abs_emp_id, abs_date, abs_time, abs_reason, abs_latitude_in, abs_longitude_in, abs_address_in, abs_zone_region_in, abs_zone_time_in) 
+                                VALUES (?,?,?,?,?,?,?,?,?)', 
+                                [
+                                    $emp_id,
+                                    $current_date,
+                                    $absen,
+                                    $latitude,
+                                    $longitude,
+                                    $address,
+                                    $region,
+                                    $zone_time
+                                ]
+                            );
         
-        DB::insert('INSERT INTO tbl_absence 
-                    (abs_emp_id, abs_emp_name, abs_emp_grade, abs_emp_division, abs_emp_dept,
-                    abs_emp_coach, abs_emp_manager, abs_date, abs_check_in,
-                    abs_latitude_in, abs_longitude_in, abs_address_in, abs_zone_region_in, abs_zone_time_in) 
-                    VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)', 
+        if($insert_data){
+
+            $user_checkin = DB::connection('mysql')->table('abs_in')
+                        ->select('abs_in_id', 'abs_emp_id', 'abs_time')
+                        ->where('emp_id', '=', $emp_id)
+                        ->latest('abs_time')
+                        ->get();
+            $shift_check_in_awal = strtotime("08:30");
+            if($user_checkin->abs_time < $shift_check_in_awal){
+                $status_check_in = "On Time";
+            }else{
+                $status_check_in = "Late";
+            }
+            DB::insert('INSERT INTO absen
+            (abs_emp_id, shift_id, abs_in_id, abs_out_id, status_check_in, status_check_out) 
+            VALUES (?,?,?,?,?,?)', 
+            [
+                $emp_id,
+                $user_checkin->abs_in_id,
+                0, 
+                $status_check_in,
+                0
+            ]
+        );
+        }
+            
+    }
+
+    public function checkOutStore(Request $request){
+        $request->validate([
+            'emp_id' => 'integer',
+            'date' => 'required|datetime',
+            'check_out' => 'required|datetime',
+            'reason' => 'nullable|string',
+            'latitude' => 'string',
+            'longitude' => 'string',
+            'address' => 'string',
+            'region' => 'string',
+            'zone_time' => 'required|not_in:0'
+        ]);
+
+        $emp_id = $request->emp_id;
+        $current_date = $request->date;
+        $absen = $request->check_out;
+        $latitude = $request->latitude;
+        $longitude = $request->longitude;
+        $address = $request->address;
+        $region = $request->region;
+        $zone_time = $request->zone_time;
+
+        $user_checkin = DB::connection('mysql')->table('abs_in')
+                        ->select('abs_in_id', 'abs_emp_id')
+                        ->where('emp_id', '=', $emp_id)
+                        ->latest('abs_time')
+                        ->get();
+        
+        DB::insert('INSERT INTO abs_out
+                    (abs_emp_id, abs_in_id, abs_date, abs_time, abs_reason, abs_latitude_out, abs_longitude_out, abs_address_out, abs_zone_region_out, abs_zone_time_out) 
+                    VALUES (?,?,?,?,?,?,?,?,?,?)', 
                     [
-                        $users_data->emp_id,
-                        $users_data->emp_full_name,
-                        $users_data->emp_grade,
-                        $users_data->emp_division,
-                        $users_data->emp_department,
-                        $users_data->emp_coach,
-                        $users_data->emp_manager,
+                        $emp_id,
+                        $user_checkin->abs_in_id,
                         $current_date,
-                        $current_hour,
-                        $users_data->emp_id,
-                        $users_data->emp_id,
-                        $users_data->emp_id,
-                        $users_data->emp_id,
-                    ]);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    public function update($id){
-
+                        $absen,
+                        $latitude,
+                        $longitude,
+                        $address,
+                        $region,
+                        $zone_time
+                    ]
+                );
     }
 }

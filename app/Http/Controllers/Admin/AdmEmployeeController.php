@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\MonthlyAttandance;
-use App\Http\Requests\StoreMonthlyAttandanceRequest;
-use App\Http\Requests\UpdateMonthlyAttandanceRequest;
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class MonthlyAttandanceController extends Controller
+class AdmEmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -31,10 +30,10 @@ class MonthlyAttandanceController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreMonthlyAttandanceRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreMonthlyAttandanceRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -42,10 +41,10 @@ class MonthlyAttandanceController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\MonthlyAttandance  $monthlyAttandance
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(MonthlyAttandance $monthlyAttandance)
+    public function show($id)
     {
         //
     }
@@ -53,10 +52,10 @@ class MonthlyAttandanceController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\MonthlyAttandance  $monthlyAttandance
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(MonthlyAttandance $monthlyAttandance)
+    public function edit($id)
     {
         //
     }
@@ -64,11 +63,11 @@ class MonthlyAttandanceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateMonthlyAttandanceRequest  $request
-     * @param  \App\Models\MonthlyAttandance  $monthlyAttandance
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateMonthlyAttandanceRequest $request, MonthlyAttandance $monthlyAttandance)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -76,10 +75,10 @@ class MonthlyAttandanceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\MonthlyAttandance  $monthlyAttandance
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MonthlyAttandance $monthlyAttandance)
+    public function destroy($id)
     {
         //
     }

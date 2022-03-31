@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 // use App\Models\Admin;
 use App\Models\Attendance;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 // use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -29,5 +32,10 @@ class AdminController extends Controller
 
         $data_employee = [$employee_total, $percentageOntime, $onTime_employee, $lateTime_employee];
         return view('admin.index')->with(['data' => $data_employee]);
+    }
+
+    public function dailyAttendance(){
+        // $date = Carbon::now()->format('l');
+        // dd($date);
     }
 }

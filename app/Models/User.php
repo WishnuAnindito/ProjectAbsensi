@@ -13,7 +13,7 @@ class User extends Authenticatable
 
     use HasApiTokens, HasFactory, Notifiable;
 
-    protected $table = 'emp_person';
+    protected $table = 'tbl_users';
     protected $connection = 'mysql';
 
     /**
@@ -22,12 +22,9 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'phone',
-        'address',
-        'schedule',
+        'user_init',
+        'user_name',
+        'user_pass',
     ];
 
     /**
@@ -36,8 +33,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        'user_pass',
     ];
 
     /**
@@ -46,6 +42,5 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 }

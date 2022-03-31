@@ -16,3 +16,7 @@ function toggleFormElements(bDisabled) {
         buttons[i].disabled = bDisabled;
     }
 }
+
+// function toggleCheckOutLoc(bDisabled){
+//     var 
+// }

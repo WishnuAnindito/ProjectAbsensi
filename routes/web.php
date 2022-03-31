@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Check\LoginController;
-use App\Http\Controllers\PenarikanBarang\HeaderController;
+use App\Http\Controllers\Employee\AttendanceController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -21,8 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('employee.attendance', ['today' => Carbon::today()->toDateString(), 'now' => Carbon::now()->toTimeString()]);
-    // return DB::table('emp_person')->where('emp_id', 8)->first();
-});
+ });
 
 // Auth::routes();
 
@@ -32,7 +32,15 @@ Route::get('/login', [LoginController::class, 'index'])->middleware('guest')->na
 Route::post('/login', [LoginController::class, 'customLogin'])->middleware('guest')->name('login');
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 
-Route::get('/attendance', [Controllers\Admin\AttendanceController::class, 'index'])->name('attendance');
+Route::get('/dashboard', function () {
+    return view('admin.dashboard');
+})->name('dashboard');
+
+Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance');
+Route::post('/checkinattendance', [AttendanceController::class, 'checkInStore'])->name('check-in');
+Route::post('/checkoutattendance', [AttendanceController::class, 'checkOutStore'])->name('check-out');
+
+Route::get('/attendanceadmin', [Controllers\Admin\AttendanceController::class, 'index'])->name('attendance');
 
 Route::get('/testHome', function(){
     return view('test');
@@ -46,3 +54,5 @@ Route::get('/cekdb', function(){
 });
 
 Route::get('/header', [HeaderController::class, 'create']);
+
+Route::get('/today', [AdminController::class,'dailyAttendance']);

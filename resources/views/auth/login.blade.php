@@ -1,5 +1,8 @@
 @extends('layouts.template')
+@section('title', 'Login Page')
 
+@section('nav')
+@extends('layouts.navigation-bar-guest')
 @section('content')
 <div class="login-dark" style="height: 695px;">
     <form method="POST" action="{{ route('login') }}">
@@ -9,7 +12,7 @@
             <i class="icon ion-ios-locked-outline"></i>
         </div>
         <div class="form-group">
-            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
+            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="user_name" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="Email">
             @error('email')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>
@@ -17,7 +20,7 @@
             @enderror
         </div>
         <div class="form-group">
-            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
+            <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="user_pass" required autocomplete="current-password" placeholder="Password">
             @error('password')
                 <span class="invalid-feedback" role="alert">
                     <strong>{{ $message }}</strong>

@@ -28,14 +28,26 @@
             });
         });
     </script>
+    <script type="text/javascript">
+        function showTime() {
+            var date = new Date(),
+                time = new Date(Date(
+                date.getFullYear(),
+                date.getMonth(),
+                date.getDate(),
+                date.getHours(),
+                date.getMinutes(),
+                date.getSeconds()
+                ));
+    
+            document.getElementById('time').innerHTML = time.toLocaleTimeString();
+        }
+    
+        setInterval(showTime, 100);
+        </script>
     <title>@yield('title')</title>
 </head>
 <body>
-    @auth()
-        @extends('layouts.navigation-bar')
-    @else
-        @extends('layouts.navigation-bar-guest')
-    @endauth
-    @section('content')
+    @yield('nav')
 </body>
 </html>

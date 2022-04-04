@@ -33,14 +33,18 @@ Route::post('/login', [LoginController::class, 'customLogin'])->middleware('gues
 Route::post('/logout', [LoginController::class, 'logout'])->middleware('auth')->name('logout');
 
 Route::get('/dashboard', function () {
-    return view('admin.dashboard');
+    return view('employee.dashboard');
 })->name('dashboard');
+
+Route::get('/dashboardadmin', function () {
+    return view('admin.dashboard');
+})->name('dashboard-admin');
 
 Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance');
 Route::post('/checkinattendance', [AttendanceController::class, 'checkInStore'])->name('check-in');
 Route::post('/checkoutattendance', [AttendanceController::class, 'checkOutStore'])->name('check-out');
 
-Route::get('/attendanceadmin', [Controllers\Admin\AttendanceController::class, 'index'])->name('attendance');
+Route::get('/attendanceadmin', [Controllers\Admin\AttendanceController::class, 'index'])->name('attendance-admin');
 
 Route::get('/testHome', function(){
     return view('test');

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Models\User;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 
 // use Illuminate\Http\Request;
@@ -35,7 +36,7 @@ class AdminController extends Controller
     }
 
     public function dailyAttendance(){
-        // $date = Carbon::now()->format('l');
-        // dd($date);
+        $today = Carbon::now()->format('Y-m-d');
+        dd($today);
     }
 }

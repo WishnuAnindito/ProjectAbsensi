@@ -1,6 +1,8 @@
 @extends('layouts.template')
 @section('title', 'Dashboard')
 
+@section('nav')
+@extends('layouts.navigation-bar-admin')
 @section('content')
   <div class="container">
     <h2 class="mb-4">Dashboard</h2>

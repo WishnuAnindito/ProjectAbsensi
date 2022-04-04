@@ -1,6 +1,8 @@
 @extends('layouts.template')
 @section('title', 'Attendance')
 
+@section('nav')
+@extends('layouts.navigation-bar-admin')
 @section('content')
 <div class="container">
     <h2 class="mt-4">Monthly Attendance Report</h2>
@@ -15,9 +17,9 @@
       <tbody>
           @foreach ($attendances as $attendance)
             <tr>
-                <th scope="row">{{$attendance->id}}</th>
+                {{-- <th scope="row">{{$attendance->id}}</th>
                 <td>{{$attendance->user->name}}</td>
-                <td>{{$attendance->attendance_time}}</td>
+                <td>{{$attendance->attendance_time}}</td> --}}
             </tr>  
           @endforeach
       </tbody>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -11,23 +12,30 @@ class AdmAttendanceController extends Controller
 {
     public function dailyAttendance(){
         $today = Carbon::now()->format('Y-m-d');
+        // $data = DB::connection('mysql')->table('absen')
+        //         ->select('absen.*')
+        //         ->join('abs_in', 'absen.abs_in_id', '=', 'abs_in.abs_in_id')
+        //         ->where('abs_in.abs_date', '=', $today)
+        //         ->get();
         $data = DB::connection('mysql')->table('absen')
-                ->select('absen.*')
-                ->join('abs_in', 'absen.abs_in_id', '=', 'abs_in.abs_in_id')
-                ->where('abs_in.abs_date', '=', $today)
-                ->get();
+                    ->select('exec admDailyCheckIn(?)', array($today));
+        
 
         return view('admin.attendance', ['attendance', $data]);
     }
 
     public function weeklyAttendance(){
-        $start_of_Attendance = Carbon::setWeekStartsAt(Carbon::MONDAY);
-        $end_of_Attendance = Carbon::setWeekEndsAt(Carbon::SUNDAY);
+        $ind = CarbonImmutable::now()->locale('id');
+        $start_of_Attendance = $ind->startOfWeek(Carbon::MONDAY);
+        $end_of_Attendance = $ind->endOfWeek(Carbon::SUNDAY);
         
-        $report_data = DB::connection('mysql')->table('absen')
-                    ->whereBetween('DAY(abs_date)', [$start_of_Attendance,$end_of_Attendance])
-                    ->get();
+        // $report_data = DB::connection('mysql')->table('absen')
+        //             ->whereBetween('DAY(abs_date)', [$start_of_Attendance,$end_of_Attendance])
+        //             ->get();
 
+        $report_data = DB::connection('mysql')->table('absen')
+                    ->select('exec admWeeklyAttendance(?,?)', array($start_of_Attendance,$end_of_Attendance));
+        
         return view('admin.attendanceReport', ['report' => $report_data]);
     }
 

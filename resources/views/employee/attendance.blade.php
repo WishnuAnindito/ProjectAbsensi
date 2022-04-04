@@ -1,6 +1,8 @@
 @extends('layouts.template')
 @section('title', 'Attendance')
 
+@section('nav')
+@extends('layouts.navigation-bar-user')
 @section('content')
     <div class="container">
         <h2 class="mt-4 mb-5">Attendance</h2>

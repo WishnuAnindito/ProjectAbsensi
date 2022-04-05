@@ -12,10 +12,10 @@
                 <a href="{{route('attendance-admin')}}">Attendance</a>
             </li>
             <li>
-                <a href="{{}}">History</a>
+                <a href="#">History</a>
             </li>
             <li>
-                <a href="{{}}">Overtime</a>
+                <a href="#">Overtime</a>
             </li>
             <li>
                 <a href="#">Schedule</a>

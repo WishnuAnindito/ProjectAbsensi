@@ -15,7 +15,8 @@
         </tr>
       </thead>
       <tbody>
-          @foreach ($attendances as $attendance)
+        {{-- {{dd($attendance)}} --}}
+          @foreach ($attendance as $attendance)
             <tr>
                 {{-- <th scope="row">{{$attendance->id}}</th>
                 <td>{{$attendance->user->name}}</td>

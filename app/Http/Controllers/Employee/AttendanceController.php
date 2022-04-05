@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employee;
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Mockery\Generator\StringManipulation\Pass\Pass;
 
@@ -20,7 +21,6 @@ class AttendanceController extends Controller
     {
         // Validasi terhadap input pada Form
         $request->validate([
-            'emp_id' => 'integer',
             'date' => 'required|date',
             'check_in' => 'required|time',
             'reason' => 'nullable|string',
@@ -32,7 +32,8 @@ class AttendanceController extends Controller
         ]);
 
         // Deklarasi hasil input ke dalam sebuah variable
-        $emp_id = $request->emp_id;
+        // $emp_id = $request->emp_id;
+        $emp_id = Auth::user()->id;
         $current_date_in = $request->date;
         $absen_in = $request->check_in;
         $latitude_in = $request->latitude;
@@ -169,5 +170,8 @@ class AttendanceController extends Controller
         return view('employee.checkOutHistory', ['history' => $history]);
     }
     
+    function sendNotif($emp_name, $emp_lead, $lead_number){
+
+    }
    
 }

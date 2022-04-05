@@ -18,9 +18,9 @@ class AdmAttendanceController extends Controller
         //         ->where('abs_in.abs_date', '=', $today)
         //         ->get();
         $data = DB::connection('mysql')->table('absen')
-                    ->select('exec admDailyCheckIn(?)', array($today));
+                    ->select('exec admDailyCheckIn(?)', array($today))->get();
         
-
+        
         return view('admin.attendance', ['attendance', $data]);
     }
 
@@ -62,7 +62,7 @@ class AdmAttendanceController extends Controller
         }
 
         $data_employee = [$employee_total, $percentageOntime, $onTime_employee, $lateTime_employee];
-        return view('admin.index', ['data' => $data_employee]);
+        return view('admin.dashboard', ['data' => $data_employee]);
     }
 
     public function lateTimeEmployee(){

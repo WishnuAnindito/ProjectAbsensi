@@ -11,7 +11,7 @@
         <div class="card bg-secondary" style="height:100%">
           <div class="row ms-1">
             <div class="col-sm-4 card-body">
-              <h3 class="card-title">21</h3>
+              <h3 class="card-title">{{$data[0]}}</h3>
               <p class="card-text text-white">Total Employees</p>
             </div>
             <div class="col-sm-4 card-body">
@@ -27,7 +27,7 @@
         <div class="card bg-success" style="height:100%">
           <div class="row ms-1">
             <div class="col-sm-4 card-body">
-              <h3 class="card-title">100%</h3>
+              <h3 class="card-title">{{$data[1]}}%</h3>
               <p class="card-text text-white">On Time Percentage</p>
             </div>
             <div class="col-sm-4 card-body">
@@ -43,7 +43,7 @@
         <div class="card bg-warning" style="height:100%">
           <div class="row ms-1">
             <div class="col-sm-4 card-body">
-              <h4 class="card-title">10</h4>
+              <h4 class="card-title">{{$data[2]}}</h4>
               <p class="card-text text-white">On Time Today</p>
             </div>
             <div class="col-sm-4 card-body fa-4x">
@@ -59,7 +59,7 @@
         <div class="card bg-danger" style="height:100%">
           <div class="row ms-1">
             <div class="col-sm-4 card-body">
-              <h4 class="card-title">11</h4>
+              <h4 class="card-title">{{$data[3]}}</h4>
               <p class="card-text text-white">Late Today</p>
             </div>
             <div class="col-sm-4 card-body">

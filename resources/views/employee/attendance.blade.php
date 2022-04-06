@@ -59,7 +59,7 @@
                     <input type="description" class="form-control" name="check-in-description" id="check-in-description">
                 </div>
                 {{-- <input type="hidden" value="{{$user->emp_id}}"> --}}
-                <button type="submit" id="check-in-loc-btn" class="btn btn-success col-md-2" onclick="toggleFormElements(true)">Check In</button>
+                <button type="submit" id="check-in-loc-btn" class="btn btn-success col-md-2" onclick="toggleCheckoutLoc()">Check In</button>
             </div>
         </form>
         <form action="" id="check-out-loc">
@@ -87,7 +87,7 @@
                 <div class="col-md-5">
                     <input type="description" class="form-control" name="check-out-description" id="check-out-description" disabled>
                 </div>
-                <button type="submit" class="btn btn-danger col-md-2" disabled>Check Out</button>
+                <button type="submit" id="check-out-submit" class="btn btn-danger col-md-2" disabled>Check Out</button>
             </div>
         </form>
     </div>

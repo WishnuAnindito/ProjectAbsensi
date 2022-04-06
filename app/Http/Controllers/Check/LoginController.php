@@ -30,8 +30,8 @@ class LoginController extends Controller
         $email = $request->email;
         $password = md5($request->password);
 
-        $users = $request->except(['_token']);
-        dd(Auth::attempt($users));      
+        // $users = $request->except(['_token']);
+        // dd(Auth::login($users->emp_id););      
         $users_data = DB::connection('mysql')->table('emp_person','ep')
                     ->select('ep.emp_id','ep.emp_email_office','tbl_users.user_pass', 'tbl_users.user_grade', 'emp_position.emp_status')
                     ->join('emp_position','ep.emp_id', '=', 'emp_position.emp_id')

@@ -33,9 +33,9 @@ document.getElementById('check-in-loc-btn').onclick = function(){
     }
 }
 
-function toggleCheckOutLoc(){
-    var timezone = document.getElementById('check-out-timezone').disabled = false;
-    var description = document.getElementById('check-out-description').disabled = false;
-    var submit = document.getElementById('check-out-submit').disabled = false;
-    
-}
+// function toggleCheckOutLoc(){
+//     var timezone = document.getElementById('check-out-timezone').disabled = false;
+//     var description = document.getElementById('check-out-description').disabled = false;
+//     var submit = document.getElementById('check-out-submit').disabled = false;
+// }
+

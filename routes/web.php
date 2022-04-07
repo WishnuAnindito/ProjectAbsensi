@@ -58,3 +58,11 @@ Route::get('/cekdb', function(){
 Route::get('/header', [HeaderController::class, 'create']);
 
 Route::get('/today', [AdminController::class,'dailyAttendance']);
+
+Route::get('/get-procedure', function(){
+    $procedure = DB::select('call teknisiDD()'); //->get('dept_name');
+    foreach ($procedure as $dpt){
+        $dept_name = $dpt->dept_name;
+        echo $dept_name ."<br>";
+    }
+});

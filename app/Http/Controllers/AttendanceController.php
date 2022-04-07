@@ -2,84 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\AttendanceEmp;
 use App\Models\Attendance;
-// use App\Http\Requests\StoreAttendanceRequest;
-// use App\Http\Requests\UpdateAttendanceRequest;
-use App\Models\LateTime;
-use App\Models\User;
-use DateTime;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\StoreAttendanceRequest;
+use App\Http\Requests\UpdateAttendanceRequest;
+use Illuminate\Support\Facades\DB;
 
 class AttendanceController extends Controller
 {
-    /**
-     * Display a listing of the attendance.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index() //Menampilkan seluruh data absensi kehadiran karyawan hari ini
-    {
-        return view('admin.attendance')->with(['attendances' => Attendance::all()]);
-    }
+    public function adminDashboard(){
+        $database = DB::connection('mysql');
 
-    /**
-     * Display a listing of the lateTime.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function indexLateTime() //Menampilkan seluruh data karyawan yang terlambat hari ini
-    {
-        return view('admin.latetime')->with(['latetimes' => LateTime::all()]);
-    }
+        // Jumlah karyawan teknisi
+        $employee_total = $database->table('tbl_users')->where('user_grade', '<', '3')->count();
 
-    /**
-     * assign attendance to employee.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function create(AttendanceEmp $request){ //Input data Attendance ke dalam database
-        $request->validate();
-        if($employee = User::whereEmail(request('email'))->first()){
-            if(Hash::check($request->password, $employee->password)){
-                if(!Attendance::whereAttendance_date(date("d-m-Y"))->whereUser_id($employee->id)->first()){
-                    $attendance = new Attendance;
-                    $attendance->user_id = $employee->id;
-                    $attendance->attendance_time = date("H:i:s");
-                    $attendance->attendance_date = date("d-m-Y");
+        // Jumlah attendance hari ini
+        $attandance_total = $database->table('abs_in')->count('abs_in_id'); 
 
-                    if(!($employee->schedules->first()->time_in)){
-                        $attendance->status = "Terlambat";
-                        AttendanceController::lateTime($employee);
-                    }
-                    $attendance->save();
+        // Jumlah attendance yang ontime
+        $onTime_employee = $database->table('abs_in')->where('status_check_in', 'like', 'On Time')->get()->count();
 
-                    
-                }else{
-                    return redirect()->route('attendance.login')->with('error', 'your assigned your attendance before');
-                }
-            }else{
-                return redirect()->route('attendance.login')->with('error', 'Failed to assign the attendance');
-            }
+        // Jumlah karyawan yang terlambat
+        $lateTime_employee =$database->table('abs_in')->where('status_check_in', 'like', 'Late')->get()->count();
+
+        // Persentase kehadiran
+        if ($attandance_total > 0) {
+            $percentageOntime = str_split(($onTime_employee / $attandance_total) * 100, 4)[0];
+        } else {
+            $percentageOntime = 0;
         }
-        return redirect()->route('home')->with('success', 'Successful in assign the attendance');
+
+        $data_employee = [$employee_total, $percentageOntime, $onTime_employee, $lateTime_employee];
+        return view('admin.dashboard', ['data' => $data_employee]);
     }
 
-    /**
-     * assign late time for attendace .
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public static function lateTime(User $employee){
-        $current_time = new DateTime(date("H:i:s"));
-        $start_time = new DateTime($employee->schedules->first()->time_in);
-        $difference = $start_time->diff($current_time)->format('%H:%I:%S');
-
-        $latetime = new Latetime;
-        $latetime->user_id = $employee->id;
-        $latetime->duration = $difference;
-        $latetime->latetime_date = date("d-m-Y");
-        $latetime->save();
-    }
 }

@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/css/sidebar.css">
     <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <script src="/js/attendance.js"></script>
+    {{-- <script src="/js/attendance.js"></script> --}}
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize" async defer></script>
     <script src="https://kit.fontawesome.com/f9efa1e251.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -44,6 +44,23 @@
         }
     
         setInterval(showTime, 100);
+        </script>
+        <script type="text/javascript">
+        $('form#check-in-loc').submit(function(e){
+        // $('#check-in-loc-btn').on("click",function() {
+        if ($('#check-out-timezone').is(':disabled') && $('#check-out-description').is(':disabled') && $('#check-out-submit').is(':disabled')) {
+            $('#check-out-timezone').removeAttr('disabled', false);
+            $('#check-out-description').removeAttr('disabled', false);
+            $('#check-out-submit').prop('disabled', false);
+            // $('#check-out-timezone').removeAttr('disabled');
+            // $('#check-out-description').removeAttr('disabled');
+            // $('#check-out-submit').removeAttr('disabled');
+        } else {
+            $('#check-out-timezone').attr('disabled', 'disabled');
+            $('#check-out-description').attr('disabled', 'disabled');
+            $('#check-out-submit').attr('disabled', 'disabled');
+        }
+        });
         </script>
     <title>@yield('title')</title>
 </head>

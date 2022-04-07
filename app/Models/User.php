@@ -10,9 +10,6 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-
-    // use HasApiTokens, Notifiable;
-
     protected $table = 'tbl_users';
     protected $connection = 'mysql';
 

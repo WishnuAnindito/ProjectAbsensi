@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('tbl_attendance', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::create('tbl_division', function (Blueprint $table) {
+            $table->id('division_id');
+            $table->string('division_name');
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tbl_attendance');
+        Schema::dropIfExists('tbl_division');
     }
 };

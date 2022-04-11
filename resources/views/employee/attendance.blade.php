@@ -91,7 +91,7 @@
             </div>
         </form>
     </div>
-    <div class="container mt-5">
+    <div class="container mt-5" id="absen">
         <h2 class="my-4">Absen Pekerjaan</h2>
         <form action="" method="">
             @csrf

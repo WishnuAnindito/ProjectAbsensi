@@ -3,9 +3,10 @@
 use App\Http\Controllers;
 use App\Http\Controllers\Admin\AdmAttendanceController;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Check\LoginController;
+
 use App\Http\Controllers\Employee\AttendanceController;
 use App\Http\Controllers\Employee\DashboardController;
+use App\Http\Controllers\LoginController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -45,7 +46,7 @@ Route::post('/checkoutattendance', [AttendanceController::class, 'checkOutStore'
 Route::get('/attendanceadmin', [AdmAttendanceController::class, 'dailyAttendance'])->name('attendance-admin');
 
 Route::get('/testHome', function(){
-    return view('test');
+    return view('homepage');
 });
 
 

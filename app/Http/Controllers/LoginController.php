@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -23,42 +24,18 @@ class LoginController extends Controller
             'user_name' => 'required|email',
             'user_pass' => 'required',
         ]);
-        
-        $email = $request->user_name;
-        $password = md5($request->user_pass);
-        dd($request->user_name,$request->user_pass);
-        
-        $users_data = DB::connection('mysql')->table('emp_person','ep')
-                    ->select('ep.emp_id','ep.emp_email_office','tbl_users.user_pass', 'tbl_users.user_grade', 'emp_position.emp_status')
-                    ->join('emp_position','ep.emp_id', '=', 'emp_position.emp_id')
-                    ->join('tbl_users', 'ep.emp_id', '=', 'tbl_users.user_id')
-                    ->where('ep.emp_email_office', 'like', $email)
-                    ->where('tbl_users.user_pass', 'like',$password)
-                    ->where('emp_position.emp_status', '<', 3)
-                    ->where('tbl_users.user_grade', '<', 99)
-                    ->first();
 
-        $admin_data = DB::connection('mysql')->table('tbl_users')
-                    ->select('tbl_users.user_name','tbl_users.user_pass', 'tbl_users.user_grade', 'emp_position.emp_status')
-                    ->join('emp_position','tbl_users.user_id', '=', 'emp_position.emp_id')
-                    ->where('tbl_users.user_name', 'like', $email)
-                    ->where('tbl_users.user_pass', 'like', $password)
-                    ->where('emp_position.emp_status', '<', 3)
-                    ->where('tbl_users.user_grade', '=', 99)
-                    ->first();
+        $credentials = $request->only('user_name', 'user_pass');
 
-        
-        if($users_data){
-            return redirect()->route('dashboard')->with('users', $users_data);
-        }else if($admin_data){
-            return redirect()->route('dashboard-admin')->with('admin', $admin_data);
-        }else{
-            return redirect()->back()->withErrors(['ErrorAccount', 'Akun tidak sesuai!!!']);
+        if(Auth::attempt($credentials)){
+            if(Auth::user()->id == 1){
+                return redirect()->intended('admin/dashboard')->with('Success','Signed In');
+            }
+            return redirect()->intended('dashboard')->with('Success','Signed In');
         }
-
-
+        return redirect('login')->with('Error', 'Login details are not valid');   
     }
-    
+
     public function logout(){
         Auth::logout();
         return redirect('home');

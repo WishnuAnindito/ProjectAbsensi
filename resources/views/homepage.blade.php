@@ -10,7 +10,7 @@
 </head>
 <body>
     <h1>Login</h1>
-    <form method="POST" action="{{route('/logintest')}}">
+    <form method="POST" action="{{--route('/logintest')--}}">
     <div class="row">
         <label for="email">Email</label>
         <input type="email" name="user_name" autocomplete="off" placeholder="email@example.com">

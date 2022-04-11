@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Attendance;
 use App\Http\Requests\StoreAttendanceRequest;
 use App\Http\Requests\UpdateAttendanceRequest;
+use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
 
 class AttendanceController extends Controller
@@ -33,6 +35,42 @@ class AttendanceController extends Controller
 
         $data_employee = [$employee_total, $percentageOntime, $onTime_employee, $lateTime_employee];
         return view('admin.dashboard', ['data' => $data_employee]);
+    }
+
+    public function dailyAttendance(){
+        $today = Carbon::now()->format('Y-m-d');
+        $data = DB::connection('mysql')->table('absen')
+                    ->select('call admDailyCheckIn(?)', array($today))->get();
+        return view('admin.attendance', ['attendance', $data]);
+    }
+
+    public function weeklyAttendance(){
+        $ind = CarbonImmutable::now()->locale('id');
+        $start_of_Attendance = $ind->startOfWeek(Carbon::MONDAY);
+        $end_of_Attendance = $ind->endOfWeek(Carbon::SUNDAY);
+        
+        $report_data = DB::connection('mysql')->table('absen')
+                    ->select('call admWeeklyAttendance(?,?)', array($start_of_Attendance,$end_of_Attendance));
+        
+        return view('admin.attendanceReport', ['report' => $report_data]);
+    }
+
+    public function lateTimeEmployee(){
+        $database = DB::connection('mysql');
+        $lateTime_employee = $database->select('SELECT * FROM abs_in WHERE status_check_in LIKE `Late`');
+        return view('admin.lateTime', ['late' => $lateTime_employee]);
+    }
+
+    public function ontTimeEmployee(){
+        $database = DB::connection('mysql');
+        $onTime_employee = $database->select('SELECT * FROM abs_in WHERE status_check_in LIKE `On Time` ');
+        return view('admin.lateTime', ['onTime' => $onTime_employee]);
+    }
+
+    public function getScheduledEmployee(){
+        $database = DB::connection('mysql');
+        $schedule = $database->select('SELECT * FROM tbl_schedule WHERE DATE(date) = CURRENT_TIME()');
+        return view('admin.schedule',['schedule' => $schedule]);
     }
 
 }

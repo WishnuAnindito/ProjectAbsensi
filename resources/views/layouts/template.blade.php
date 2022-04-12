@@ -30,6 +30,7 @@
     </script>
     <script type="text/javascript">
         function showTime() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
             var date = new Date(),
                 time = new Date(Date(
                 date.getFullYear(),
@@ -41,6 +42,7 @@
                 ));
     
             document.getElementById('time').innerHTML = time.toLocaleTimeString();
+            document.getElementById('date').innerHTML = time.toLocaleDateString(undefined, options);
         }
     
         setInterval(showTime, 100);

@@ -16,6 +16,8 @@ class Employee extends Model
         return 'name';
     }
 
+    
+
     public function absen(){
         return $this->hasMany(Absen::class);
     }

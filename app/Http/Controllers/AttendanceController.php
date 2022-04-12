@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attendance;
-use App\Http\Requests\StoreAttendanceRequest;
-use App\Http\Requests\UpdateAttendanceRequest;
+use App\Models\AbsenIn;
+use App\Models\EmpPost;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Support\Facades\DB;
@@ -12,29 +11,44 @@ use Illuminate\Support\Facades\DB;
 class AttendanceController extends Controller
 {
     public function adminDashboard(){
-        $database = DB::connection('mysql');
-
         // Jumlah karyawan teknisi
-        $employee_total = $database->table('tbl_users')->where('user_grade', '<', '3')->count();
+        $employee_total = EmpPost::whereIn('emp_grade', ['I','II','III'])->count();
 
         // Jumlah attendance hari ini
-        $attandance_total = $database->table('abs_in')->count('abs_in_id'); 
+        $attandance_total = AbsenIn::where('abs_date', '=', Carbon::now()->format('Y-m-d'))->count();
 
         // Jumlah attendance yang ontime
-        $onTime_employee = $database->table('abs_in')->where('status_check_in', 'like', 'On Time')->get()->count();
+        // $onTime_employee_total = AbsenIn::where('status_check_in', 'LIKE', 'On Time')->count();
+        $onTime_employee_total = AbsenIn::where('status_check_in', 'LIKE', 'On Time')
+            ->AndWhere('abs_date', '=', Carbon::now()->format('Y-m-d'))->count();
 
         // Jumlah karyawan yang terlambat
-        $lateTime_employee =$database->table('abs_in')->where('status_check_in', 'like', 'Late')->get()->count();
+        $lateTime_employee_total = AbsenIn::where('status_check_in', 'LIKE', 'Late')
+            ->AndWhere('abs_date', '=', Carbon::now()->format('Y-m-d'))->count();
 
         // Persentase kehadiran
         if ($attandance_total > 0) {
-            $percentageOntime = str_split(($onTime_employee / $attandance_total) * 100, 4)[0];
+            $percentageOntime = str_split(($onTime_employee_total / $attandance_total) * 100, 4)[0];
         } else {
             $percentageOntime = 0;
         }
 
-        $data_employee = [$employee_total, $percentageOntime, $onTime_employee, $lateTime_employee];
-        return view('admin.dashboard', ['data' => $data_employee]);
+        $onTime_employee = AbsenIn::where('status_check_in', 'LIKE', 'On Time')
+            ->AndWhere('abs_date', '=', Carbon::now()->format('Y-m-d'))->get();
+
+        $lateTime_employee = AbsenIn::where('status_check_in', 'LIKE', 'Late')
+            ->AndWhere('abs_date', '=', Carbon::now()->format('Y-m-d'))->get();
+
+        // $data_employee = [$employee_total, $percentageOntime, $onTime_employee_total, $lateTime_employee_total];
+        return view('admin.dashboard', [
+            'employee_total' => $employee_total,
+            'attandance_total' => $attandance_total,
+            'onTime_employee_total' => $onTime_employee_total,
+            'lateTime_employee_total' => $lateTime_employee_total,
+            '$percentageOntime' => $percentageOntime,
+            '$onTime_employee' => $onTime_employee,
+            'lateTime_employee' => $lateTime_employee
+        ]);
     }
 
     public function dailyAttendance(){

@@ -8,16 +8,17 @@
     <link rel="stylesheet" href="css/homepage.css">
     <link rel="icon" type="image/x-icon" href="assets/tangara.png">
 </head>
-<body>
-    <h1>Login</h1>
-    <form method="POST" action="{{--route('/logintest')--}}">
+<body style="background-image: url('{{asset('images/server_room.jpeg')}}')">
+    <h1>PT. Tangara Mitrakom</h1>
+    <img src="{{Storage::url('images/tm.png')}}" alt="">
+    <form method="POST" action="">
     <div class="row">
         <label for="email">Email</label>
-        <input type="email" name="user_name" autocomplete="off" placeholder="email@example.com">
+        <input type="email" name="user_name" autocomplete="off" placeholder="Email">
     </div>
     <div class="row">
         <label for="password">Password</label>
-        <input type="password" name="user_pass">
+        <input type="password" name="user_pass" placeholder="Password">
     </div>
     <button type="submit">Login</button>
     </form>

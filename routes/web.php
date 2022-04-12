@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminController;
 
 use App\Http\Controllers\Employee\AttendanceController;
 use App\Http\Controllers\Employee\DashboardController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
@@ -23,9 +24,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('employee.attendance', ['today' => Carbon::today()->toDateString(), 'now' => Carbon::now()->toTimeString()]);
- });
+Route::get('/', [HomeController::class, 'index']);
 
 // Auth::routes();
 
@@ -58,7 +57,10 @@ Route::get('/cekdb', function(){
 
 Route::get('/header', [HeaderController::class, 'create']);
 
-Route::get('/today', [AdminController::class,'dailyAttendance']);
+// Route::get('/today', [AdminController::class,'dailyAttendance']);
+Route::get('/today', function(){
+    echo Carbon::now()->format('Y-m-d');
+});
 
 Route::get('/get-procedure', function(){
     $procedure = DB::select('call teknisiDD()'); //->get('dept_name');

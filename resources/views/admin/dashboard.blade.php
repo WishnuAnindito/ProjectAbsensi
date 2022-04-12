@@ -46,8 +46,8 @@
               <h4 class="card-title">{{$data[2]}}</h4>
               <p class="card-text text-white">On Time Today</p>
             </div>
-            <div class="col-sm-4 card-body fa-4x">
-              <i class="fa-solid fa-clock"></i>
+            <div class="col-sm-4 card-body">
+              <i class="fa-solid fa-clock fa-5x"></i>
             </div>
             <a href="#">
               <h6 class="card-footer text-center mt-2">More Info <i class="fa-solid fa-circle-arrow-right"></i></h6>

@@ -46,7 +46,7 @@
             
             <div class="navbar nav mb-0">
                 <a class="nav-link dropdown-toggle text-white me-2" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    User
+                    {{}}
                 </a>
                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                     <div>

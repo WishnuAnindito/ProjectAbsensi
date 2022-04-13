@@ -54,11 +54,10 @@ class Employee extends Model
         'emp_full_name',
         'emp_birth_date',
         'emp_email_office',
-        'emp_password'
     ];
 
     protected $hidden = [
-        'emp_password'
+        
     ];
 
     protected $casts = [];

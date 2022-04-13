@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('emp_full_name');
             $table->date('emp_birth_date');
             $table->string('emp_email_office');
-            $table->string('emp_password');
         });
     }
 

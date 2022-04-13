@@ -12,7 +12,7 @@ class LoginController extends Controller
     public function index()
     {
         // Pergi ke halaman Login
-        return view('auth.login');
+        return redirect()->route('index');
     }
 
     public function customLogin(Request $request){
@@ -23,20 +23,26 @@ class LoginController extends Controller
         ]);
 
         // Mengambil data inputan user
-        $credentials = $request->only('user_name', 'user_pass');
+        $credentials = [
+            'user_name' => $request->user_name,
+            'password' => $request->user_pass
+        ];
 
         // Validasi akun dengan database
+        // dd(Auth::attempt($credentials));
         if(Auth::attempt($credentials)){
             // Pengecekan user admin atau bukan
-            if(Auth::user()->emp_id == 1){
+            if(Auth::user()->user_id == 1){
                 // Pergi ke halaman dashboard khusus admin
-                return redirect()->intended('admin/dashboard')->with('Success','Signed In');
+                return redirect()->route('dashboard-admin')->with('Success','Signed In');
             }
             // pergi kehalaman dashboard untuk teknisi
-            return redirect()->intended('dashboard')->with('Success','Signed In');
+            return redirect()->route('dashboard')->with('Success','Signed In');
         }
         // Data yang diinput tidak sesuai
-        return redirect('login')->with('Error', 'Login details are not valid');   
+        return back()
+                ->withInput()
+                ->withErrors(['Error', 'Login details are not valid']);   
     }
 
     public function logout(){

@@ -8,6 +8,7 @@
         "php": "^8.0.2",
         "alexpechkarev/google-maps": "^9.0",
         "barryvdh/laravel-dompdf": "^1.0",
+        "cornford/googlmapper": "^3.4",
         "guzzlehttp/guzzle": "^7.2",
         "illuminate/hashing": "^9.6",
         "laravel/framework": "^9.2",

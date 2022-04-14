@@ -164,21 +164,22 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        
         /*
-         * Package Service Providers...
-         */
-
+        * Package Service Providers...
+        */
+        
         /*
-         * Application Service Providers...
-         */
+        * Application Service Providers...
+        */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laravolt\Indonesia\ServiceProvider::class,
-
+        // Cornford\Googlmapper\MapperServiceProvider::class,
+        
     ],
 
     /*
@@ -193,9 +194,13 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // ...
+
+        'Indonesia' => Laravolt\Indonesia\Facade::class,
+        // 'Mapper'    => Cornford\Googlmapper\Facades\MapperFacade::class,
+
+
     ])->toArray(),
-    'Indonesia' => Laravolt\Indonesia\Facade::class,
+    
     
 
 ];

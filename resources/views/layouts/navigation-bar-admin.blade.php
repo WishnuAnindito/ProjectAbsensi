@@ -9,19 +9,20 @@
               <a href="{{route('dashboard-admin')}}">Dashboard</a>
             </li>
             <li>
-                <a href="{{route('attendance-admin')}}">Attendance</a>
+                <a href="#">Technician</a>
+            </li>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#" id="historyDropdown" data-bs-toggle="dropdown">History</a>
+                <ul class="dropdown-menu" aria-labelledby="historyDropdown">
+                    <li><a class="dropdown-item" href="">On Time</a></li>
+                    <li><a class="dropdown-item" href="">Late Time</a></li>
+                    <li><a class="dropdown-item" href="">Leave Early</a></li>
+                    <li><a class="dropdown-item" href="">Leave On Time</a></li>
+                    <li><a class="dropdown-item" href="">Overtime</a></li>
+                </ul>
             </li>
             <li>
-                <a href="#">History</a>
-            </li>
-            <li>
-                <a href="#">Overtime</a>
-            </li>
-            <li>
-                <a href="#">Schedule</a>
-            </li>
-            <li>
-                <a href="#">Late Time</a>
+                <a href="#">Report</a>
             </li>
       </ul>
       <div>
@@ -37,7 +38,7 @@
     <!-- Page Content  -->
     <div id="content">
         
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0">
+        {{-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0">
             <div class="container-fluid">
                 
                 <button type="button" id="sidebarCollapse" class="btn btn-dark">
@@ -65,7 +66,7 @@
                     </div> 
                 </div>
             </div>
-        </nav>
+        </nav> --}}
         @yield('content')
     </div>
 </div>

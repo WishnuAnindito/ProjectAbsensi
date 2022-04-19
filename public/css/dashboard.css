@@ -1,3 +1,12 @@
-#time{
-    font-size: 20px;
+hr{
+    border: none;
+    border-top:1px solid black;
+}
+
+#time, #date{
+    font-family: 'Inria Serif', serif;
+}
+
+.card-title, .card-text{
+    font-family: 'Montserrat', sans-serif;
 }

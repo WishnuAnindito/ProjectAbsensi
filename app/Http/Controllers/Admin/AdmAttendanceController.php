@@ -36,6 +36,13 @@ class AdmAttendanceController extends Controller
         return view('admin.dashboard', ['data' => $data_employee]);
     }
 
+    public function employeeList(){
+        $employees = DB::table('emp_person')
+                    ->select('emp_id', 'emp_full_name', 'emp_email_office')
+                    ->get();
+        return view('admin.employee', ['employees' => $employees]);
+    }
+
     public function dailyAttendance(){
         $today = Carbon::now()->format('Y-m-d');
         $data = DB::connection('mysql')->table('absen')
@@ -55,20 +62,28 @@ class AdmAttendanceController extends Controller
     }
 
     public function lateTimeEmployee(){
-        $database = DB::connection('mysql');
-        $lateTime_employee = $database->select('SELECT * FROM abs_in WHERE status_check_in LIKE `Late`');
-        return view('admin.lateTime', ['late' => $lateTime_employee]);
+        // $database = DB::connection('mysql');
+        // $lateTime_employee = $database->select('SELECT * FROM abs_in WHERE status_check_in LIKE `Late`');
+        // return view('admin.latetime', ['late' => $lateTime_employee]);
+        return view('admin.latetime');
     }
 
-    public function ontTimeEmployee(){
-        $database = DB::connection('mysql');
-        $onTime_employee = $database->select('SELECT * FROM abs_in WHERE status_check_in LIKE `On Time` ');
-        return view('admin.lateTime', ['onTime' => $onTime_employee]);
+    public function onTimeEmployee(){
+        // $database = DB::connection('mysql');
+        // $onTime_employee = $database->select('SELECT * FROM abs_in WHERE status_check_in LIKE `On Time` ');
+        // return view('admin.ontime', ['onTime' => $onTime_employee]);
+        return view('admin.ontime');
     }
 
-    public function getScheduledEmployee(){
-        $database = DB::connection('mysql');
-        $schedule = $database->select('SELECT * FROM tbl_schedule WHERE DATE(date) = CURRENT_TIME()');
-        return view('admin.schedule',['schedule' => $schedule]);
+    public function overTimeEmployee(){
+        return view('admin.overtime');
+    }
+
+    public function leaveEarlyEmployee(){
+        return view('admin.leaveearly');
+    }
+    
+    public function leaveOnTimeEmployee(){
+        return view('admin.leaveontime');
     }
 }

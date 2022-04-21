@@ -38,6 +38,14 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 
 Route::get('/dashboardadmin', [AdmAttendanceController::class, 'adminDashboard'])->name('dashboard-admin');
 
+Route::get('/employeelist', [AdmAttendanceController::class, 'employeeList'])->name('employee-list');
+
+Route::get('/ontimelist', [AdmAttendanceController::class, 'onTimeEmployee'])->name('on-time');
+Route::get('/latetimelist', [AdmAttendanceController::class, 'lateTimeEmployee'])->name('late-time');
+Route::get('/leaveearlylist', [AdmAttendanceController::class, 'leaveEarlyEmployee'])->name('leave-early');
+Route::get('/leaveontimelist', [AdmAttendanceController::class, 'leaveOnTimeEmployee'])->name('leave-on-time');
+Route::get('/overtimelist', [AdmAttendanceController::class, 'overTimeEmployee'])->name('over-time');
+
 Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance');
 Route::post('/checkinattendance', [AttendanceController::class, 'checkInStore'])->name('check-in');
 Route::post('/checkoutattendance', [AttendanceController::class, 'checkOutStore'])->name('check-out');

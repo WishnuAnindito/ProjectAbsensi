@@ -9,23 +9,23 @@
               <a href="{{route('dashboard-admin')}}">Dashboard</a>
             </li>
             <li>
-                <a href="#">Technician</a>
+                <a href="{{route('employee-list')}}">Employee</a>
             </li>
             <li class="dropdown">
-                <a class="dropdown-toggle" href="#" id="historyDropdown" data-bs-toggle="dropdown">History</a>
-                <ul class="dropdown-menu" aria-labelledby="historyDropdown">
-                    <li><a class="dropdown-item" href="">On Time</a></li>
-                    <li><a class="dropdown-item" href="">Late Time</a></li>
-                    <li><a class="dropdown-item" href="">Leave Early</a></li>
-                    <li><a class="dropdown-item" href="">Leave On Time</a></li>
-                    <li><a class="dropdown-item" href="">Overtime</a></li>
+                <a class="dropdown-toggle" href="#historyDropdown" data-bs-toggle="collapse" aria-expanded="false">History</a>
+                <ul class="collapse list-unstyled" id="historyDropdown">
+                    <li><a href="{{route('on-time')}}">On Time</a></li>
+                    <li><a href="{{route('late-time')}}">Late Time</a></li>
+                    <li><a href="{{route('leave-early')}}">Leave Early</a></li>
+                    <li><a href="{{route('leave-on-time')}}">Leave On Time</a></li>
+                    <li><a href="{{route('over-time')}}">Overtime</a></li>
                 </ul>
             </li>
             <li>
                 <a href="#">Report</a>
             </li>
       </ul>
-      <div>
+      <div class="fixed-bottom">
           <form action="{{route('logout')}}" method="POST">
             @csrf
             <button type="submit" class="btn text-white">

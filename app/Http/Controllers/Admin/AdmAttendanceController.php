@@ -12,33 +12,59 @@ class AdmAttendanceController extends Controller
 {
     public function adminDashboard(){
         $database = DB::connection('mysql');
+        $today = Carbon::now()->format('Y-m-d');
 
         // Jumlah karyawan teknisi
         $employee_total = $database->table('tbl_users')->where('user_grade', '<', '3')->count();
 
+        // Jumlah task hari ini
+        // $daily_task_total = $database->table('tbl_task')->where('task_date', '=', $today)->count();
+        
+        // Jumlah attendance yang ontime
+        $onTime_employee_total = $database->table('abs_in')
+                        ->where('status_check_in', 'like', 'On Time')
+                        ->where('abs_date', '=', $today)
+                        ->count();
+        
+        // Data Technisian Attendance
+        $attendance_technician_data = $database->table('emp_position', 'pos')
+                        ->select('person.emp_full_name', 'tpos.pos_name', 'img.emp_image_file', 'tsk.task_id', 'abs.abs_status_in')
+                        ->join('emp_person as person', 'pos.emp_id', '=', 'person.emp_id')
+                        ->join('tbl_position as tpos', 'pos.emp_position', '=', 'tpos.pos_id')
+                        ->join('emp_images as img', 'pos.emp_id', '=', 'img.emp_id')
+                        ->join('tbl_task as tsk', 'pos.emp_id', '=', 'tsk.task_assign_to')
+                        ->join('absen_in as abs', 'pos.emp_id', '=', 'abs.abs_emp_id')
+                        ->where('img.emp_image_name', 'like', 'Photo Profile')
+                        ->where('tsk.task_date', '=', $today)
+                        ->where('abs.abs_date', '=', $today)
+                        ->whereIn('pos.emp_grade', ['I','II','III'])
+                        ->get();
+
         // Jumlah attendance hari ini
         $attandance_total = $database->table('abs_in')->count('abs_in_id'); 
-
-        // Jumlah attendance yang ontime
-        $onTime_employee = $database->table('abs_in')->where('status_check_in', 'like', 'On Time')->get()->count();
-
-        // Jumlah karyawan yang terlambat
-        $lateTime_employee =$database->table('abs_in')->where('status_check_in', 'like', 'Late')->get()->count();
-
+        
         // Persentase kehadiran
         if ($attandance_total > 0) {
-            $percentageOntime = str_split(($onTime_employee / $attandance_total) * 100, 4)[0];
+            $percentageOntime = str_split(($onTime_employee_total / $attandance_total) * 100, 4)[0];
         } else {
             $percentageOntime = 0;
         }
 
-        $data_employee = [$employee_total, $percentageOntime, $onTime_employee, $lateTime_employee];
+        $data_employee = [$employee_total, $percentageOntime, $onTime_employee_total, $attendance_technician_data];
+
         return view('admin.dashboard', ['data' => $data_employee]);
     }
 
     public function employeeList(){
-        $employees = DB::table('emp_person')
-                    ->select('emp_id', 'emp_full_name', 'emp_email_office')
+        $employees = DB::table('emp_position', 'pos')
+                    ->select('person.emp_id', 'person.emp_full_name', 'dpt.dept_name', 'div.division_name', 'tpos.pos_name', 'person2.emp_full_name as coach', 'person3.emp_full_name as manager')
+                    ->join('emp_person as person', 'pos.emp_id', '=', 'person.emp_id')
+                    ->join('emp_person as person2', 'pos.emp_coach', '=', 'person2.emp_id')
+                    ->join('emp_person as person3', 'pos.emp_manager', '=', 'person3.emp_id')
+                    ->join('tbl_department as dpt', 'pos.emp_department', '=', 'dpt.dept_id')
+                    ->join('tbl_division as div', 'pos.emp_division','=', 'div.division_id')
+                    ->join('tbl_position as tpos', 'pos.emp_position', '=', 'tpos.pos_id')
+                    ->whereIn('pos.emp_grade', ['I','II','III'])
                     ->get();
         return view('admin.employee', ['employees' => $employees]);
     }
@@ -85,5 +111,9 @@ class AdmAttendanceController extends Controller
     
     public function leaveOnTimeEmployee(){
         return view('admin.leaveontime');
+    }
+
+    public function attendanceWeeklyReport(){
+        return view('admin.report');
     }
 }

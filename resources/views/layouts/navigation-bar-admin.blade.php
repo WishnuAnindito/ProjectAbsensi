@@ -22,7 +22,7 @@
                 </ul>
             </li>
             <li>
-                <a href="#">Report</a>
+                <a href="{{route('weekly-report')}}">Report</a>
             </li>
       </ul>
       <div class="fixed-bottom">

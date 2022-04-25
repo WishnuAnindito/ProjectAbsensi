@@ -9,19 +9,21 @@
         <h1 class="text-center pb-5" style="font-family: 'Montserrat', sans-serif;font-weight: 800">"LEAVE EARLIER"</h1>
     </div>
     <div class="container mt-5 border border-2 border-dark">
-        <table id="employeelist" class="table table-info table-striped">
+        <table id="leaveearly" class="table table-info table-striped">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">Date</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Email Address</th>
-                    <th scope="col">Telephone Number</th>
-                    <th scope="col">Position</th>
+                    <th scope="col">Time</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Zone Time</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <th scope="row"></th>
+                    <td></td>
+                    <td></td>
                     <td></td>
                     <td></td>
                 </tr>

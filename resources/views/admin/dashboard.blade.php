@@ -1,5 +1,5 @@
 @extends('layouts.template')
-@section('title', 'Dashboard')
+@section('title', 'Admin Dashboard')
 
 @section('nav')
 @extends('layouts.navigation-bar-admin')

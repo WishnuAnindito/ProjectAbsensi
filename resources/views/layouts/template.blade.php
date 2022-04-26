@@ -13,8 +13,12 @@
     <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
+    @yield('css')
+    <title>@yield('title')</title>
+</head>
+<body>
+    @yield('nav')
+    
     <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&libraries=places&callback=initialize" async defer></script>
     <script src="https://kit.fontawesome.com/f9efa1e251.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -22,8 +26,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
-            
-            $("#employeelist").DataTable();
 
             $("#sidebar").mCustomScrollbar({
                 theme: "minimal"
@@ -34,7 +36,6 @@
                 $('.collapse.in').toggleClass('in');
                 $('a[aria-expanded=true]').attr('aria-expanded', 'false');
             });
-            $('#employeelist').DataTable();
         });
     </script>
     <script type="text/javascript">
@@ -73,9 +74,6 @@
         }
         });
         </script>
-    <title>@yield('title')</title>
-</head>
-<body>
-    @yield('nav')
+        @yield('script')
 </body>
 </html>

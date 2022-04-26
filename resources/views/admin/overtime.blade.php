@@ -1,5 +1,5 @@
 @extends('layouts.template')
-@section('title', 'Employee List')
+@section('title', 'Overtime History')
 
 @section('nav')
 @extends('layouts.navigation-bar-admin')

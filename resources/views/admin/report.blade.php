@@ -1,5 +1,5 @@
 @extends('layouts.template')
-@section('title', 'Employee List')
+@section('title', 'Weekly Attendance Report')
 
 @section('nav')
 @extends('layouts.navigation-bar-admin')
@@ -12,11 +12,11 @@
         <table id="report" class="table table-info table-striped">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
+                    <th scope="col">Date</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Email Address</th>
-                    <th scope="col">Telephone Number</th>
-                    <th scope="col">Position</th>
+                    <th scope="col">Task Name</th>
+                    <th scope="col">Check In Status</th>
+                    <th scope="col">Check Out Status</th>
                 </tr>
             </thead>
             <tbody>

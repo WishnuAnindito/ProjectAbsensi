@@ -152,7 +152,6 @@ return [
         Illuminate\Filesystem\FilesystemServiceProvider::class,
         Illuminate\Foundation\Providers\FoundationServiceProvider::class,
         Illuminate\Hashing\HashServiceProvider::class,
-        // App\Libraries\HashServiceProvider::class,
         Illuminate\Mail\MailServiceProvider::class,
         Illuminate\Notifications\NotificationServiceProvider::class,
         Illuminate\Pagination\PaginationServiceProvider::class,
@@ -164,22 +163,22 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        
         /*
         * Package Service Providers...
         */
-        
+
+        // Barryvdh\DomPDF\ServiceProvider::class,
         /*
         * Application Service Providers...
         */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
+        // App\Libraries\HashServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         Laravolt\Indonesia\ServiceProvider::class,
-        // Cornford\Googlmapper\MapperServiceProvider::class,
-        
+        // Cornford\Googlmapper\MapperServiceProvider::class,   
     ],
 
     /*
@@ -197,10 +196,9 @@ return [
 
         'Indonesia' => Laravolt\Indonesia\Facade::class,
         // 'Mapper'    => Cornford\Googlmapper\Facades\MapperFacade::class,
-
-
+        // 'PDF' => Barryvdh\DomPDF\Facade::class,
     ])->toArray(),
-    
-    
+
+
 
 ];

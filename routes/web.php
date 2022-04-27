@@ -27,30 +27,30 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard
 Route::get('/send-email', [MailController::class, 'sendEmail']);
 
 // Admin Controller
-Route::controller(AdmAttendanceController::class)->group(function(){
+Route::controller(AdmAttendanceController::class)->group(function () {
     // Dashboard
     Route::get('/dashboardadmin', 'adminDashboard')->name('dashboard-admin');
 
     // All List
-    Route::get('/employeelist','employeeList')->name('employee-list');
-    Route::get('/ontimelist','onTimeEmployee')->name('on-time');
+    Route::get('/employeelist', 'employeeList')->name('employee-list');
+    Route::get('/ontimelist', 'onTimeEmployee')->name('on-time');
     Route::get('/latetimelist', 'lateTimeEmployee')->name('late-time');
     Route::get('/leaveearlylist', 'leaveEarlyEmployee')->name('leave-early');
     Route::get('/leaveontimelist', 'leaveOnTimeEmployee')->name('leave-on-time');
     Route::get('/overtimelist', 'overTimeEmployee')->name('over-time');
-    
+
     // Report 
     Route::get('/weeklyreport', 'attendanceWeeklyReport')->name('weekly-report');
 });
 
 // Page for Guest Only
-Route::middleware('guest')->group(function(){
+Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'customLogin'])->name('login');
 });
 
 // Page for Users who have registered or successfully logged in
-Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 

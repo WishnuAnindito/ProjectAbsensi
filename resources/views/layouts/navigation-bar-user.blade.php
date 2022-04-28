@@ -1,4 +1,4 @@
-<div class="wrapper">
+{{-- <div class="wrapper">
     <!-- Sidebar  -->
     <nav id="sidebar">
         <div class="sidebar-header">
@@ -33,6 +33,6 @@
 
     <!-- Page Content  -->
     <div id="content">
-        @yield('content')
     </div>
-</div>
+</div> --}}
+@yield('content')

@@ -7,6 +7,7 @@
     <div class="container mt-5">
         <div class="row">
             <div class="col-sm-4 text-white">
+              <a href="{{route('historyPage')}}">
                 <div class="card bg-secondary" style="height:100%">
                   <div class="row ms-1 my-auto">
                     <div class="col-sm-2 card-body">
@@ -17,6 +18,7 @@
                     </div>
                   </div>
                 </div>
+              </a>
               </div>
               <div class="col-sm-4 text-white">
                 <div class="card bg-info" style="height:100%">
@@ -32,16 +34,18 @@
                 </div>  
               </div>
               <div class="col-sm-4 text-white">
-                <div class="card bg-success" style="height:100%">
-                  <div class="row ms-1">
-                    <div class="col-sm-2 card-body">
-                        <i class="fa-solid fa-calendar-days fa-5x"></i>
+                <a href="">
+                  <div class="card bg-success" style="height:100%">
+                    <div class="row ms-1">
+                      <div class="col-sm-2 card-body">
+                          <i class="fa-solid fa-calendar-days fa-5x"></i>
+                      </div>
+                      <div class="col-sm-7 card-body text-center">
+                        <h2 class="card-title text-bold">Weekly Attendance</h2>
+                      </div>  
                     </div>
-                    <div class="col-sm-7 card-body text-center">
-                      <h2 class="card-title text-bold">Weekly Attendance</h2>
-                    </div>  
-                  </div>
-                </div>  
+                  </div>  
+                </a>
               </div>
               
             </div>
@@ -52,7 +56,7 @@
           <div class="fs-2 text-center" id="time"></div>
         </div>
         <hr class="mt-1 mb-2">
-        <div class="container">
+        <div class="container" style="max-height: 400px; height:100%">
           <div class="row">
             <div class="col-sm-4 border bordered">
                 <img src="" alt="">
@@ -64,6 +68,22 @@
             <div class="col-sm-8 border bordered">
               <h2 class="text-center mb-4">My Daily Task</h2>
               <div class="accordion" id="accordionExample">
+                <div class="accordion-item mt-2">
+                  <h2 class="accordion-header" id="task1-heading">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#task1" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo" style="background-color: #DBFF00">
+                      <strong>T001:</strong>Pemasangan kabel Jaringan di Rumah Bu Jamal
+                    </button>
+                  </h2>
+                  <div id="task1" class="accordion-collapse collapse" aria-labelledby="task1-heading">
+                    <div class="accordion-body pb-5">
+                      <h6>Waktu Tiba : </h6>
+                      <h6>Waktu Selesai : </h6>
+                      <h6>Lokasi : </h6>
+                      <h6>Kota : </h6>
+                      <h6>Status : </h6>
+                      <button class="btn btn-success float-end">Check In</button>
+                    </div>
+                  </div>
                 <div class="accordion-item mt-2">
                   <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo" style="background-color: #DBFF00">

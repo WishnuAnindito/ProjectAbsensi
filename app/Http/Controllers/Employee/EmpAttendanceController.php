@@ -45,6 +45,10 @@ class EmpAttendanceController extends Controller
         ]);
     }
 
+    public function historyPage() {
+        return view('employee.history');
+    }
+
     public function history($id, $date)
     {
         $emp_task = DB::table('tbl_task')

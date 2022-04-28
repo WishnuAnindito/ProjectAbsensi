@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdmAttendanceController;
 
 use App\Http\Controllers\Employee\AttendanceController;
 use App\Http\Controllers\Employee\DashboardController;
+use App\Http\Controllers\Employee\EmpAttendanceController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Mail\MailController;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('index');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+Route::get('/attendancehistory', [EmpAttendanceController::class, 'historyPage'])->name('historyPage');
 Route::get('/send-email', [MailController::class, 'sendEmail']);
 
 // Admin Controller

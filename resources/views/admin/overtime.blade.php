@@ -1,6 +1,10 @@
 @extends('layouts.template')
 @section('title', 'Overtime History')
 
+@section('css')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
+@endsection
+
 @section('nav')
 @extends('layouts.navigation-bar-admin')
 @section('content')
@@ -30,4 +34,13 @@
             </tbody>
         </table>
     </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+        $('#overtime').DataTable();
+        } );
+    </script>
 @endsection

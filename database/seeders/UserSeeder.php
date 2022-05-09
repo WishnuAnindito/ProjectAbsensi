@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
         DB::table('tbl_users')->insert([
             'user_name' => 'admin@mitrakom.co.id',
             'user_pass' => bcrypt('Tangara'),
-            'user_grade' => 99
+            'user_grade' => 1
         ]);
 
         DB::table('tbl_users')->insert([
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder
         DB::table('tbl_users')->insert([
             'user_name' => 'rrg@mitrakom.co.id',
             'user_pass' => bcrypt('password'),
-            'user_grade' => 2
+            'user_grade' => 3
         ]);
         
         DB::table('tbl_users')->insert([

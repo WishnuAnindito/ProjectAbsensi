@@ -20,7 +20,7 @@ class AdmAttendanceController extends Controller
         $employee_total = $database->table('tbl_users')->where('user_grade', '<', '3')->count();
 
         // Jumlah task hari ini
-        // $daily_task_total = $database->table('tbl_task')->where('task_date', '=', $today)->count();
+        $daily_task_total = $database->table('tbl_task')->where('task_date', '=', $today)->count();
 
         // Jumlah attendance yang ontime
         $onTime_employee_total = $database->table('abs_in')
@@ -28,22 +28,8 @@ class AdmAttendanceController extends Controller
             ->where('abs_date', '=', $today)
             ->count();
 
-        // Data Technisian Attendance
-        $attendance_technician_data = $database->table('emp_position', 'pos')
-            ->select('person.emp_full_name', 'tpos.pos_name', 'img.emp_image_file', 'tsk.task_id', 'abs.abs_status_in')
-            ->join('emp_person as person', 'pos.emp_id', '=', 'person.emp_id')
-            ->join('tbl_position as tpos', 'pos.emp_position', '=', 'tpos.pos_id')
-            ->join('emp_images as img', 'pos.emp_id', '=', 'img.emp_id')
-            ->join('tbl_task as tsk', 'pos.emp_id', '=', 'tsk.task_assign_to')
-            ->join('absen_in as abs', 'pos.emp_id', '=', 'abs.abs_emp_id')
-            ->where('img.emp_image_name', 'like', 'Photo Profile')
-            ->where('tsk.task_date', '=', $today)
-            ->where('abs.abs_date', '=', $today)
-            ->whereIn('pos.emp_grade', ['I', 'II', 'III'])
-            ->get();
-
         // Jumlah attendance hari ini
-        $attandance_total = $database->table('abs_in')->count('abs_in_id');
+        $attandance_total = $database->table('abs_in')->where('abs_date', '=', $today)->count('abs_in_id');
 
         // Persentase kehadiran
         if ($attandance_total > 0) {
@@ -51,6 +37,21 @@ class AdmAttendanceController extends Controller
         } else {
             $percentageOntime = 0;
         }
+
+        // Data Technisian Attendance
+        $attendance_technician_data = $database->table('emp_position', 'pos')
+            // ->select('person.emp_full_name', 'tpos.pos_name','img.emp_image_file', 'tsk.task_id', 'abs.status_check_in')
+            ->select('person.emp_full_name', 'tpos.pos_name')
+            ->join('emp_person as person', 'pos.emp_id', '=', 'person.emp_id')
+            ->join('tbl_position as tpos', 'pos.emp_position', '=', 'tpos.pos_id')
+            // ->join('emp_images as img', 'pos.emp_id', '=', 'img.emp_id')
+            // ->join('tbl_task as tsk', 'pos.emp_id', '=', 'tsk.task_assign_to')
+            // ->join('abs_in as abs', 'pos.emp_id', '=', 'abs.abs_emp_id')
+            // ->where('img.emp_image_name', 'like', 'Photo Profile')
+            // ->where('tsk.task_date', '=', $today)
+            // ->where('abs.abs_date', '=', $today)
+            ->whereIn('pos.emp_grade', [2, 3, 4])
+            ->get();
 
         $data_employee = [$employee_total, $percentageOntime, $onTime_employee_total, $attendance_technician_data];
 

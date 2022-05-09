@@ -4,6 +4,7 @@
 @section('nav')
 @extends('layouts.navigation-bar-admin')
 @section('content')
+  {{dd($data)}}
   <div class="container mt-5">
     <div class="row">
       <div class="col-sm-4 text-white">
@@ -74,6 +75,8 @@
         <h5 class="text-center mt-4" style="color: #128510">ontime/late</h5>
       </div>
     </div>
+    {{-- @foreach ($data[3] as $employee)
+    @endforeach --}}
     
   </div>
 @endsection

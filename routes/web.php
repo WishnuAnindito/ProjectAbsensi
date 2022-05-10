@@ -7,6 +7,7 @@ use App\Http\Controllers\Employee\AttendanceController;
 use App\Http\Controllers\Employee\DashboardController;
 use App\Http\Controllers\Employee\EmpAttendanceController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Leader\LeaderController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Mail\MailController;
 use Illuminate\Support\Facades\Route;
@@ -45,6 +46,10 @@ Route::controller(AdmAttendanceController::class)->group(function () {
     Route::get('/weeklyreport', 'attendanceWeeklyReport')->name('weekly-report');
 });
 
+Route::controller(LeaderController::class)->group(function () {
+    Route::get('dashboardleader', 'leaderDashboard')->name('dashboard-leader');
+});
+
 // Page for Guest Only
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -57,7 +62,7 @@ Route::middleware('auth')->group(function () {
 });
 
 
-
+// Gk Kepake
 Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance');
 Route::post('/checkinattendance', [AttendanceController::class, 'checkInStore'])->name('check-in');
 Route::post('/checkoutattendance', [AttendanceController::class, 'checkOutStore'])->name('check-out');

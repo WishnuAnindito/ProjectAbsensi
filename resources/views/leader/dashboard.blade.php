@@ -1,8 +1,8 @@
 @extends('layouts.template')
-@section('title', 'Admin Dashboard')
+@section('title', 'Leader Dashboard')
 
 @section('nav')
-@extends('layouts.navigation-bar-admin')
+@extends('layouts.navigation-bar-leader')
 @section('content')
   {{-- {{dd($data)}} --}}
   <div class="container mt-5">

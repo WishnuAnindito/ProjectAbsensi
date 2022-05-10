@@ -24,19 +24,19 @@ class UserSeeder extends Seeder
         DB::table('tbl_users')->insert([
             'user_name' => 'wishnu@mitrakom.co.id',
             'user_pass' => bcrypt('password'),
-            'user_grade' => 2
+            'user_grade' => 3
         ]);
 
         DB::table('tbl_users')->insert([
             'user_name' => 'rrg@mitrakom.co.id',
             'user_pass' => bcrypt('password'),
-            'user_grade' => 3
+            'user_grade' => 5
         ]);
         
         DB::table('tbl_users')->insert([
             'user_name' => 'dadan@mitrakom.co.id',
             'user_pass' => bcrypt('password'),
-            'user_grade' => 4
+            'user_grade' => 7
         ]);
     }
 }

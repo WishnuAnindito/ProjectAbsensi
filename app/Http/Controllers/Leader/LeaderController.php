@@ -40,22 +40,23 @@ class LeaderController extends Controller
 
         // Data Technisian Attendance
         $attendance_technician_data = $database->table('emp_position', 'pos')
-            ->select('person.emp_full_name', 'tpos.pos_name', 'img.emp_image_file', 'tsk.task_id', 'abs.abs_status_in')
+            // ->select('person.emp_full_name', 'tpos.pos_name','img.emp_image_file', 'tsk.task_id', 'abs.status_check_in')
+            ->select('person.emp_full_name', 'tpos.pos_name')
             ->join('emp_person as person', 'pos.emp_id', '=', 'person.emp_id')
             ->join('tbl_position as tpos', 'pos.emp_position', '=', 'tpos.pos_id')
-            ->join('emp_images as img', 'pos.emp_id', '=', 'img.emp_id')
-            ->join('tbl_task as tsk', 'pos.emp_id', '=', 'tsk.task_assign_to')
-            ->join('absen_in as abs', 'pos.emp_id', '=', 'abs.abs_emp_id')
-            ->where('img.emp_image_name', 'like', 'Photo Profile')
-            ->where('tsk.task_date', '=', $today)
-            ->where('abs.abs_date', '=', $today)
-            ->whereIn('pos.emp_grade', ['I', 'II', 'III'])
+            // ->join('emp_images as img', 'pos.emp_id', '=', 'img.emp_id')
+            // ->join('tbl_task as tsk', 'pos.emp_id', '=', 'tsk.task_assign_to')
+            // ->join('abs_in as abs', 'pos.emp_id', '=', 'abs.abs_emp_id')
+            // ->where('img.emp_image_name', 'like', 'Photo Profile')
+            // ->where('tsk.task_date', '=', $today)
+            // ->where('abs.abs_date', '=', $today)
+            ->whereIn('pos.emp_grade', [2, 3, 4])
             ->get();
 
         $data_employee = [$employee_total, $percentageOntime, $onTime_employee_total, $attendance_technician_data];
 
 
-        return view('admin.dashboard', ['data' => $data_employee]);
+        return view('leader.dashboard', ['data' => $data_employee]);
     }
 
     public function employeeList()
@@ -175,23 +176,4 @@ class LeaderController extends Controller
         return view('admin.report');
     }
 
-
-    public function createTask(Request $request){
-        $request->validate([
-            'task_assign_by' => 'required|integer',
-            'task_assign_to' => 'required|integer',
-            'task_name' => 'required|text',
-            'task_date' => 'required|date',
-            'task_start_time' => 'required|time',
-            'task_end_time' => 'required|time',
-            'task_zone_time' => 'required|text',
-            'task_address' => 'required|text',
-            'task_city' => 'required|text',
-            // 'task_emp_status' => 'required|text',
-            // 'task_lead_status' => 'required|text',
-        ]);
-
-
-
-    }
 }

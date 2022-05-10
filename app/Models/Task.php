@@ -7,6 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
+
+    public function employee(){
+        return $this->belongsTo(Employee::class, ['task_assign_by', 'task_assign_to'], 'emp_id');
+    }
+
     protected $table = 'tbl_task';
     protected $connection = 'mysql';
 

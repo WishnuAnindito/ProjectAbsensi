@@ -16,8 +16,6 @@ class Employee extends Model
         return 'name';
     }
 
-    
-
     public function absen(){
         return $this->hasMany(Absen::class);
     }
@@ -50,6 +48,9 @@ class Employee extends Model
         return $this->hasOne(EmpPost::class);
     }
 
+    public function task(){
+        return $this->hasOne(Task::class);
+    }
     protected $fillable = [
         'emp_full_name',
         'emp_birth_date',

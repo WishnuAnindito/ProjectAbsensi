@@ -63,7 +63,10 @@
                 
                 <h2>Lorem ipsum</h2>
                 <h4>VSAT Technician Service Point Tangerang Selatan</h4>
-                <button>logout</button>
+                <form action="{{route('logout')}}" method="POST">
+                  @csrf
+                  <button type="submit" class="btn btn-primary">Logout</button>
+                </form>
             </div>
             <div class="col-sm-8 border bordered">
               <h2 class="text-center mb-4">My Daily Task</h2>

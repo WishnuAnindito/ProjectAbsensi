@@ -32,22 +32,31 @@ Route::get('/send-email', [MailController::class, 'sendEmail']);
 // Admin Controller
 Route::controller(AdmAttendanceController::class)->group(function () {
     // Dashboard
-    Route::get('/dashboardadmin', 'adminDashboard')->name('dashboard-admin');
+    Route::get('/admin/dashboard', 'adminDashboard')->name('dashboard-admin');
 
     // All List
-    Route::get('/employeelist', 'employeeList')->name('employee-list');
-    Route::get('/ontimelist', 'onTimeEmployee')->name('on-time');
-    Route::get('/latetimelist', 'lateTimeEmployee')->name('late-time');
-    Route::get('/leaveearlylist', 'leaveEarlyEmployee')->name('leave-early');
-    Route::get('/leaveontimelist', 'leaveOnTimeEmployee')->name('leave-on-time');
-    Route::get('/overtimelist', 'overTimeEmployee')->name('over-time');
+    Route::get('/admin/employeelist', 'employeeList')->name('employee-list-admin');
+    Route::get('/admin/ontimelist', 'onTimeEmployee')->name('on-time-admin');
+    Route::get('/admin/latetimelist', 'lateTimeEmployee')->name('late-time-admin');
+    Route::get('/admin/leaveearlylist', 'leaveEarlyEmployee')->name('leave-early-admin');
+    Route::get('/admin/leaveontimelist', 'leaveOnTimeEmployee')->name('leave-on-time-admin');
+    Route::get('/admin/overtimelist', 'overTimeEmployee')->name('over-time-admin');
 
     // Report 
-    Route::get('/weeklyreport', 'attendanceWeeklyReport')->name('weekly-report');
+    Route::get('/admin/weeklyreport', 'attendanceWeeklyReport')->name('weekly-report-admin');
 });
 
 Route::controller(LeaderController::class)->group(function () {
-    Route::get('dashboardleader', 'leaderDashboard')->name('dashboard-leader');
+    Route::get('/leader/dashboard', 'leaderDashboard')->name('dashboard-leader');
+
+    Route::get('/leader/employeelist', 'employeeList')->name('employee-list-leader');
+    Route::get('/leader/ontimelist', 'onTimeEmployee')->name('on-time-leader');
+    Route::get('/leader/latetimelist', 'lateTimeEmployee')->name('late-time-leader');
+    Route::get('/leader/leaveearlylist', 'leaveEarlyEmployee')->name('leave-early-leader');
+    Route::get('/leader/leaveontimelist', 'leaveOnTimeEmployee')->name('leave-on-time-leader');
+    Route::get('/leader/overtimelist', 'overTimeEmployee')->name('over-time-leader');
+
+    Route::get('/leader/weeklyreport', 'attendanceWeeklyReport')->name('weekly-report-leader');
 });
 
 // Page for Guest Only

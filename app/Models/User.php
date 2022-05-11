@@ -10,6 +10,11 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
+    // use HasFactory;
+    public function employee(){
+        return $this->belongsTo(Employee::class);
+    }
+
     protected $table = 'tbl_users';
     protected $connection = 'mysql';
 

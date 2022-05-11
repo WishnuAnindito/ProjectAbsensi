@@ -4,7 +4,6 @@
 @section('nav')
 @extends('layouts.navigation-bar-leader')
 @section('content')
-  {{-- {{dd($data)}} --}}
   <div class="container mt-5">
     <div class="row">
       <div class="col-sm-4 text-white">

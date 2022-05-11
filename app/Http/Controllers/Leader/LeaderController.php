@@ -61,7 +61,7 @@ class LeaderController extends Controller
 
     public function employeeList()
     {
-        $id = Auth::user()->id;
+        $id = Auth::user()->user_id;
 
         $employees = DB::table('emp_position', 'pos')
             ->select('person.emp_id', 'person.emp_full_name', 'dpt.dept_name', 'div.division_name', 'tpos.pos_name', 'person2.emp_full_name as coach', 'person3.emp_full_name as manager')

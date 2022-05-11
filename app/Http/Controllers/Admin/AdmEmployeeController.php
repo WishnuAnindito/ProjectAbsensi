@@ -14,7 +14,7 @@ class AdmEmployeeController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.addUser');
     }
 
     /**

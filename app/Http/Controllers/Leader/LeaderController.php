@@ -86,7 +86,7 @@ class LeaderController extends Controller
             ->join('tbl_task as tsk', 'abs.abs_emp_id', '=', 'tsk.task_assign_to')
             ->where('abs.abs_date', '=', $today)
             ->where('abs.status_check_in', 'like', 'On Time');
-        return view('admin.ontime', ['ontime' => $on_time_employee]);
+        return view('leader.ontime', ['ontime' => $on_time_employee]);
     }
 
     public function lateTimeEmployee()
@@ -98,7 +98,7 @@ class LeaderController extends Controller
             ->join('tbl_task as tsk', 'abs.abs_emp_id', '=', 'tsk.task_assign_to')
             ->where('abs.abs_date', '=', $today)
             ->where('abs.status_check_in', 'like', 'Late');
-        return view('admin.latetime', ['latetime' => $late_time_employee]);
+        return view('leader.latetime', ['latetime' => $late_time_employee]);
     }
 
 
@@ -111,7 +111,7 @@ class LeaderController extends Controller
             ->join('tbl_task as tsk', 'abs.abs_emp_id', '=', 'tsk.task_assign_to')
             ->where('abs.abs_date', '=', $today)
             ->where('abs.status_check_out', 'like', 'Leave Early');
-        return view('admin.leaveearly', ['leaveearly' => $leave_early_employee]);
+        return view('leader.leaveearly', ['leaveearly' => $leave_early_employee]);
     }
 
     public function leaveOnTimeEmployee()
@@ -123,7 +123,7 @@ class LeaderController extends Controller
             ->join('tbl_task as tsk', 'abs.abs_emp_id', '=', 'tsk.task_assign_to')
             ->where('abs.abs_date', '=', $today)
             ->where('abs.status_check_out', 'like', 'Leave Early');
-        return view('admin.leaveontime', ['leaveOnTime' => $leave_on_time_employee]);
+        return view('leader.leaveontime', ['leaveOnTime' => $leave_on_time_employee]);
     }
 
 
@@ -143,7 +143,7 @@ class LeaderController extends Controller
             ->whereBetween('abs.abs_date', [$start_of_Attendance, $end_of_Attendance], 'and')
             ->groupBy('abs.abs_id')
             ->having('`Durasi Lembur', '>', 40);
-        return view('admin.overtime', ['overtime' => $over_time_employee]);
+        return view('leader.overtime', ['overtime' => $over_time_employee]);
     }
 
     public function weeklyAttendance()
@@ -160,7 +160,7 @@ class LeaderController extends Controller
             ->join('tbl_task as tsk', 'abs.abs_emp_id', '=', 'tsk.task_assign_to')
             ->whereBetween('abs.abs_date', [$start_of_Attendance, $end_of_Attendance], 'and');
 
-        return view('admin.attendanceReport', ['report' => $report_data]);
+        return view('leader.attendanceReport', ['report' => $report_data]);
     }
 
     public function attendanceWeeklyReport()
@@ -173,7 +173,11 @@ class LeaderController extends Controller
         // $pdf = PDF::loadView('myPDF', $data);
 
         // return $pdf->download('itsolutionstuff.pdf');
-        return view('admin.report');
+        return view('leader.report');
+    }
+
+    public function createTask(){
+        return view('leader.task');
     }
 
 }

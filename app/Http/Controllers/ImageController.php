@@ -8,5 +8,7 @@ use App\Http\Requests\UpdateImageRequest;
 
 class ImageController extends Controller
 {
-    
+    public function index(){
+        
+    }
 }

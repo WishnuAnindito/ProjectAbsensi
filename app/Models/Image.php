@@ -16,9 +16,7 @@ class Image extends Model
         'emp_img_desc',
     ];
 
-   
     protected $hidden = [];
 
-   
     protected $casts = [];
 }

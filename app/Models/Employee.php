@@ -55,7 +55,7 @@ class Employee extends Model
     public function user(){
         return $this->hasOne(User::class);
     }
-    
+
     protected $fillable = [
         'emp_full_name',
         'emp_birth_date',

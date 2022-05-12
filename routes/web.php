@@ -57,6 +57,8 @@ Route::controller(LeaderController::class)->group(function () {
     Route::get('/leader/overtimelist', 'overTimeEmployee')->name('over-time-leader');
 
     Route::get('/leader/weeklyreport', 'attendanceWeeklyReport')->name('weekly-report-leader');
+
+    Route::get('/leader/create-task', 'createTask');
 });
 
 // Page for Guest Only

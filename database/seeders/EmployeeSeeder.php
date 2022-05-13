@@ -2,10 +2,12 @@
 
 namespace Database\Seeders;
 
+use App\Models\Employee;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
 
 class EmployeeSeeder extends Seeder
 {
@@ -16,39 +18,23 @@ class EmployeeSeeder extends Seeder
      */
     public function run()
     {
-        $name = ['Admin', 'Wishnu Anindito', 'Toni Sembiring', 'Dadan Hudaya', 'Wishnu', 'Toni', 'Dadan'];
-        $birthdate = ['2000-02-02', '1999-09-19', '1980-08-08', '1985-05-05', '1991-06-06', '1990-06-07', '1995-08-08'];
-        $email = ['admin@gmail.com', 'wishnuanindito123@gmail.com', 'sembiringtoni123@gmail.com', 'dadanhudaya@mitrakom.co.id', 'wishnu@mitrakom.co.id', 'toni@mitrakom.co.id', 'dadan@mitrakom.co.id'];
-        $i = 0;
-
-        foreach ($name as $nama){
-            DB::table('emp_person')->insert([
-                'emp_full_name' => $nama,
-                'emp_birth_date' => Carbon::parse($birthdate[$i]),
-                'emp_email_office' => $email[$i]
-            ]);
-            $i++;
+        $faker = Faker::create('id_ID');
+        for($i = 1;$i <= 100; $i++){
+            if(Employee::all()->count() == null){
+                DB::table('emp_person')->insert([
+                    'emp_full_name' => 'Kang Mas Admin',
+                    'emp_birth_date' =>  Carbon::parse('1987-05-09'),
+                    'emp_phone' => '081234567890',
+                    'emp_email_office' => 'admin@mitrakom.co.id'
+                ]);
+            }else{
+                DB::table('emp_person')->insert([
+                    'emp_full_name' => $faker->name,
+                    'emp_birth_date' =>  $faker->date,
+                    'emp_phone' => $faker->phoneNumber,
+                    'emp_email_office' => $faker->unique()->email
+                ]);
+            }
         }
-
-        // DB::table('emp_person')->insert([
-        //     'emp_full_name' => 'Admin',
-        //     'emp_birth_date' => Carbon::parse('2000-02-02'),
-        //     'emp_email_office' => 'admin@mitrakom.co.id'
-        // ]);
-        // DB::table('emp_person')->insert([
-        //     'emp_full_name' => 'Wishnu Anindito',
-        //     'emp_birth_date' => Carbon::parse('1999-09-19'),
-        //     'emp_email_office' => 'wishnu@mitrakom.co.id'
-        // ]);
-        // DB::table('emp_person')->insert([
-        //     'emp_full_name' => 'Toni Sembiring',
-        //     'emp_birth_date' => Carbon::parse('1980-08-08'),
-        //     'emp_email_office' => 'rrg@mitrakom.co.id'
-        // ]);
-        // DB::table('emp_person')->insert([
-        //     'emp_full_name' => 'Dadan Hudaya',
-        //     'emp_birth_date' => Carbon::parse('1985-05-05'),
-        //     'emp_email_office' => 'dadan@mitrakom.co.id'
-        // ]);
     }
 }

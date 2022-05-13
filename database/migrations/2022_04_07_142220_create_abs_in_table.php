@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::create('abs_in', function (Blueprint $table) {
             $table->id('abs_in_id');
+            $table->foreignId('task_id');
             $table->foreignId('abs_emp_id');
             $table->date('abs_date');
             $table->time('abs_time');
@@ -27,6 +28,7 @@ return new class extends Migration
             $table->string('status_check_in');
             
             // Foreign Key
+            $table->foreign('task_id')->references('task_id')->on('tbl_task')->onDelete('cascade');
             $table->foreign('abs_emp_id')->references('emp_id')->on('emp_person')->onDelete('cascade');
         });
     }

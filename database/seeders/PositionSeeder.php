@@ -15,308 +15,33 @@ class PositionSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Account Manager'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Administration Staff'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Administrator Staff'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Ass. Manager'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Billing Support & Administrator SPV'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Computer Technician'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Coordinator'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Courier Staff'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Deputi General Manager'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Director'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Driver'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Electrical Sr. Staff'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Engineer'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Engineer SPV'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Head Of IT & Operation Bitnet'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Helper'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'HR Staff'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Jr.Engineer'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Junior Project Administrator Staff'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Manager'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Marketing Communication Staff'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'MP Upgrade Technician'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'MP Upgrade Technician Service Point Kendari'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'MP Upgrade Technician Service Point Samarinda'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'MP Upgrade Technician SP Pontianak'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Office Boy'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Office Girl'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Operator'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Programmer'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Project Management Officer'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Purchasing Staff'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'QC Technician'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Receptcionis'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Recruitment Specialist'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Repair Technician'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Report Administration Staff'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Sales Executive'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Secretary BOD'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Security'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Security Ambon'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Security Kupang'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Security Manokwari'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Security Mataram'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Senior Staff'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Shift Coordinator Senior Staff'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Staff'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Supervisor'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Teknisi GA'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Area Jakarta'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Jakarta Timur'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Aceh'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Bali'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Balikpapan'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Bandung'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Banjarmasin'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Batam'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Bekasi'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Bogor'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Cilegon'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Cirebon'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Denpasar'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Depok'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Jakarta Barat'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Jakarta Barat'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Jakarta Timur'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Jambi'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Jayapura'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Jember'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Jogjakarta'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Kediri'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Kupang'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Lampung'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Lombok'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Makassar'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Malang'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Manado'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Medan'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Padang'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Palangkaraya'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Palembang'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Palu'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Pekanbaru'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Pematangsiantar'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Pontianak'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Purwokerto'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Samarinda'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Semarang'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Solo'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Surabaya'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Tangerang'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Tangerang Kota'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Tangerang Selatan'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Yogyakarta'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Web Develop'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Cost Controller'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'VSAT Technician Service Point Sorong'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Vice President'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'vsat technician service point mataram'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Vsat technician service point jakarta utara'
-        ]);
-        DB::table('tbl_position')->insert([
-            'pos_name' => 'Service point ambon'
-        ]);
+        $name = ['Account Manager','Administration Staff','Administrator Staff','Ass. Manager','Billing Support & Administrator SPV',
+        'Computer Technician','Coordinator','Courier Staff','Deputi General Manager','Director','Driver','Electrical Sr. Staff','Engineer',
+        'Engineer SPV','Head Of IT & Operation Bitnet','Helper','HR Staff','Jr.Engineer','Junior Project Administrator Staff','Manager',
+        'Marketing Communication Staff','MP Upgrade Technician','MP Upgrade Technician Service Point Kendari','MP Upgrade Technician Service Point Samarinda',
+        'MP Upgrade Technician SP Pontianak','Office Boy','Office Girl','Operator','Programmer','Project Management Officer','Purchasing Staff',
+        'QC Technician','Receptcionis', 'Recruitment Specialist','Repair Technician','Report Administration Staff','Sales Executive','Secretary BOD',
+        'Security','Security Ambon','Security Kupang','Security Manokwari','Security Mataram','Senior Staff','Shift Coordinator Senior Staff',
+        'Staff','Supervisor','Teknisi GA','VSAT Technician','VSAT Technician Area Jakarta','VSAT Technician Jakarta Timur','VSAT Technician Service Point Aceh',
+        'VSAT Technician Service Point Bali','VSAT Technician Service Point Balikpapan','VSAT Technician Service Point Bandung','VSAT Technician Service Point Banjarmasin',
+        'VSAT Technician Service Point Batam','VSAT Technician Service Point Bekasi','VSAT Technician Service Point Bogor','VSAT Technician Service Point Cilegon',
+        'VSAT Technician Service Point Cirebon','VSAT Technician Service Point Denpasar','VSAT Technician Service Point Depok','VSAT Technician Service Point Jakarta Barat',
+        'VSAT Technician Service Point Jakarta Barat','VSAT Technician Service Point Jakarta Timur','VSAT Technician Service Point Jambi','VSAT Technician Service Point Jayapura',
+        'VSAT Technician Service Point Jember','VSAT Technician Service Point Jogjakarta','VSAT Technician Service Point Kediri','VSAT Technician Service Point Kupang',
+        'VSAT Technician Service Point Lampung','VSAT Technician Service Point Lombok','VSAT Technician Service Point Makassar','VSAT Technician Service Point Malang',
+        'VSAT Technician Service Point Manado','VSAT Technician Service Point Medan','VSAT Technician Service Point Padang','VSAT Technician Service Point Palangkaraya',
+        'VSAT Technician Service Point Palembang','VSAT Technician Service Point Palu','VSAT Technician Service Point Pekanbaru','VSAT Technician Service Point Pematangsiantar',
+        'VSAT Technician Service Point Pontianak','VSAT Technician Service Point Purwokerto','VSAT Technician Service Point Samarinda','VSAT Technician Service Point Semarang',
+        'VSAT Technician Service Point Solo','VSAT Technician Service Point Surabaya','VSAT Technician Service Point Tangerang','VSAT Technician Service Point Tangerang Kota',
+        'VSAT Technician Service Point Tangerang Selatan','VSAT Technician Service Point Yogyakarta','Web Develop','Cost Controller','VSAT Technician Service Point Sorong',
+        'Vice President','VSAT technician service point Mataram','VSAT technician service point Jakarta Utara','Service point Ambon'
+        ];
+
+        foreach ($name as $pos_name){
+            DB::table('tbl_position')->insert([
+                'pos_name' => $pos_name
+            ]);
+        }
+       
     }
 }

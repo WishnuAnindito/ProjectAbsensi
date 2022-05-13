@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id('emp_id');
             $table->string('emp_full_name');
             $table->date('emp_birth_date');
+            $table->string('emp_phone');
             $table->string('emp_email_office');
         });
     }

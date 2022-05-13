@@ -58,7 +58,7 @@ Route::controller(LeaderController::class)->group(function () {
 
     Route::get('/leader/weeklyreport', 'attendanceWeeklyReport')->name('weekly-report-leader');
 
-    Route::get('/leader/create-task', 'createTask');
+    Route::get('/leader/create-task', 'createTask')->name('create-task');
 });
 
 // Page for Guest Only

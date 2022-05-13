@@ -2,10 +2,14 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Faker\Factory as Faker;
+
 
 class TaskSeeder extends Seeder
 {
@@ -16,32 +20,31 @@ class TaskSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tbl_task')->insert([
-            'task_assign_by' => 3,
-            'task_assign_to' => 2,
-            'task_name' => 'Pemasangan Kabel Jaringan di Jakarta',
-            'task_date' => Carbon::parse('2022-05-09'),
-            'task_start_time' => Carbon::parse('10:00:00'),
-            'task_end_time' => Carbon::parse('13:00:00'),
-            'task_zone_time' => 'WIB',
-            'task_address' => 'Jl. Jenderal Sudirman No.Kav 1, RT.1/RW.3, Gelora, Tanah Abang, Central Jakarta City, Jakarta 10270',
-            'task_city' => 'Jakarta',
-            'task_emp_status' => 'Clear',
-            'task_lead_status' => 'Waiting for Review',
-        ]);
+        $faker = Faker::create('id_ID');
+        $ind = CarbonImmutable::now()->locale('id');
 
-        DB::table('tbl_task')->insert([
-            'task_assign_by' => 3,
-            'task_assign_to' => 2,
-            'task_name' => 'Pemasangan Kabel Jaringan di Bogor',
-            'task_date' => Carbon::parse('2022-05-09'),
-            'task_start_time' => Carbon::parse('15:00:00'),
-            'task_end_time' => Carbon::parse('18:00:00'),
-            'task_zone_time' => 'WIB',
-            'task_address' => 'RW 02, Babakan Pasar, Bogor Tengah, Bogor City, West Java',
-            'task_city' => 'Bogor',
-            'task_emp_status' => 'None',
-            'task_lead_status' => 'Waiting for Review',
-        ]);
+        $startTime = Carbon::parse('08:00:00');
+        $endTime = Carbon::parse('22:00:00');
+
+        $leader = User::where('user_grade', 'IN', [5,6,7])->pluck('emp_id')->toArray();
+        $employee = User::where('user_grade', 'IN', [2,3,4])->pluck('emp_id')->toArray();
+        $emp_status = ['None', 'Check In', 'Clear'];
+        $lead_status = ['Waiting for Review', 'Approved'];
+
+        for($i = 0; $i < 100; $i++){
+            DB::table('tbl_task')->insert([
+                'task_assign_by' => $faker->randomElement($leader),
+                'task_assign_to' => $faker->randomElement($employee),
+                'task_name' => $faker->text,
+                'task_date' => $faker->dateTimeBetween('-30 days', '+30 days'),
+                'task_start_time' => $faker->time('H:i:s', $startTime),
+                'task_end_time' => $faker->time('H:i:s', $endTime),
+                'task_zone_time' => $faker->timezone(),
+                'task_address' => $faker->streetAddress(),
+                'task_city' => $faker->city(),
+                'task_emp_status' => $faker->randomElement($emp_status),
+                'task_lead_status' => $faker->randomElement($lead_status),
+            ]);
+        }
     }
 }

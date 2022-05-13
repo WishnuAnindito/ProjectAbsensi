@@ -34,6 +34,9 @@
               <li class="{{ request()->routeIs('weekly-report-leader') ? 'active' : '' }}">
                   <a href="{{route('weekly-report-leader')}}">Report</a>
               </li>
+              <li class="{{ request()->routeIs('create-task') ? 'active' : '' }}">
+                  <a href="{{route('create-task')}}">Create Task</a>
+              </li>
         </ul>
         <div class="fixed-bottom">
             <form action="{{route('logout')}}" method="POST">
@@ -47,6 +50,14 @@
   
       <!-- Page Content  -->
       <div id="content">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+
+                <button type="button" id="sidebarCollapse" class="btn btn-dark">
+                    <i class="fas fa-align-left"></i>
+                </button>
+            </div>
+        </nav>
           @yield('content')
       </div>
   </div>

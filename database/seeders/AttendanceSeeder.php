@@ -15,20 +15,11 @@ class AttendanceSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tbl_attendance')->insert([
-            'att_name' => 'Izin'
-        ]);
-        DB::table('tbl_attendance')->insert([
-            'att_name' => 'Cuti'
-        ]);
-        DB::table('tbl_attendance')->insert([
-            'att_name' => 'Sakit'
-        ]);
-        DB::table('tbl_attendance')->insert([
-            'att_name' => 'Tanpa Keterangan'
-        ]);
-        DB::table('tbl_attendance')->insert([
-            'att_name' => 'Terlambat'
-        ]);
+        $status = ['Izin','Cuti','Sakit','Tanpa Keterangan','Terlambat'];
+        foreach ($status as $stat){
+            DB::table('tbl_attendance')->insert([
+                'att_name' => $stat
+            ]);
+        }
     }
 }

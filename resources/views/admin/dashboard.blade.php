@@ -28,7 +28,7 @@
               {{-- <i class="fa-solid fa-clock fa-5x"></i> --}}
             </div>
             <div class="col-sm-7 card-body text-center">
-              <h4 class="card-title">{{$data[2]}}</h4>
+              <h4 class="card-title">{{$data[1]}}</h4>
               <p class="card-text text-white">Daily Task Total</p>
             </div>
           </div>
@@ -41,7 +41,7 @@
               <i class="fa-solid fa-chart-pie fa-5x"></i>
             </div>
             <div class="col-sm-7 card-body text-center">
-              <h3 class="card-title">{{$data[1]}}%</h3>
+              <h3 class="card-title">{{$data[2]}}%</h3>
               <p class="card-text text-white">On Time Percentage</p>
             </div>  
           </div>

@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Leader\LeaderController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Mail\MailController;
+use App\Models\Division;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,7 +44,7 @@ Route::controller(AdmAttendanceController::class)->group(function () {
     Route::get('/admin/overtimelist', 'overTimeEmployee')->name('over-time-admin');
 
     // Report 
-    Route::get('/admin/weeklyreport', 'attendanceWeeklyReport')->name('weekly-report-admin');
+    Route::get('/admin/weeklyreport', 'weeklyAttendance')->name('weekly-report-admin');
 });
 
 Route::controller(LeaderController::class)->group(function () {
@@ -77,3 +78,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance');
 Route::post('/checkinattendance', [AttendanceController::class, 'checkInStore'])->name('check-in');
 Route::post('/checkoutattendance', [AttendanceController::class, 'checkOutStore'])->name('check-out');
+Route::get('/seeder', function(){
+    $division = Division::all()->pluck('division_id')->toArray();
+    dd($division);
+});

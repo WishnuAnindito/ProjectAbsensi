@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class AbsenOut extends Model
 {
-    protected $table = 'abs_in';
+    protected $table = 'abs_out';
 
     public function absen(){
         return $this->hasOne(Absen::class, 'abs_out_id', 'abs_out_id');

@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('task_city');
             $table->string('task_emp_status');
             $table->string('task_lead_status');
-            
+
             $table->foreign('task_assign_by')->references('emp_id')->on('emp_person')->onDelete('cascade');
             $table->foreign('task_assign_to')->references('emp_id')->on('emp_person')->onDelete('cascade');
         });

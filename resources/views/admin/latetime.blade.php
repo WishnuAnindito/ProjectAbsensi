@@ -24,13 +24,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($latetime as $late)
+                    <tr>
+                        <th scope="row">{{$late->abs_date}}</th>
+                        <td>{{$late->emp_full_name}}</td>
+                        <td>{{$late->abs_time}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

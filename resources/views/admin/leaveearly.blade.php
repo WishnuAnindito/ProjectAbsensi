@@ -24,13 +24,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($leaveearly as $learly)
+                    <tr>
+                        <th scope="row">{{$learly->abs_date}}</th>
+                        <td>{{$learly->emp_full_name}}</td>
+                        <td>{{$learly->abs_time}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

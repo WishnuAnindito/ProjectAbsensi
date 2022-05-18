@@ -17,20 +17,22 @@
             <thead>
                 <tr>
                     <th scope="col">Date</th>
+                    <th scope="col">Task ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Time</th>
-                    <th scope="col">Address</th>
                     <th scope="col">Zone Time</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($ontime as $on)
+                    <tr>
+                        <th scope="row">{{$on->abs_date}}</th>
+                        <td>{{$on->task_id}}</td>
+                        <td>{{$on->emp_full_name}}</td>
+                        <td>{{$on->abs_time}}</td>
+                        <td></td>
+                    </tr>    
+                @endforeach
             </tbody>
         </table>
     </div>

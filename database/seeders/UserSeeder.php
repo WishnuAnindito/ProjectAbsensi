@@ -22,17 +22,15 @@ class UserSeeder extends Seeder
         $faker = Faker::create('id_ID');
         $employee = Employee::where('emp_id', '!=', 1)->get();
         $grade = Grade::where('grade_id', '!=', 1)->pluck('grade_id')->toArray();
-
-       
-        if(User::all()->count() == null){
-            DB::table('tbl_users')->insert([
-                'emp_id' => 'Kang Mas Admin',
-                'user_name' => 'admin@mitrakom.co.id',
-                'user_pass' => bcrypt('tangara'),
-                'user_grade' => 1
-            ]);
-        }else{
-            foreach($employee as $emp){
+        foreach ($employee as $emp) {
+            if (User::all()->count() == null) {
+                DB::table('tbl_users')->insert([
+                    'emp_id' => 1,
+                    'user_name' => 'admin@mitrakom.co.id',
+                    'user_pass' => bcrypt('tangara'),
+                    'user_grade' => 1
+                ]);
+            } else {
                 DB::table('tbl_users')->insert([
                     'emp_id' => $emp->emp_id,
                     'user_name' => $emp->emp_email_office,
@@ -40,7 +38,6 @@ class UserSeeder extends Seeder
                     'user_grade' => $faker->randomElement($grade)
                 ]);
             }
-        }
-        
+        }  
     }
 }

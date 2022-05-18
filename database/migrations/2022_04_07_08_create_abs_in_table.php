@@ -26,7 +26,7 @@ return new class extends Migration
             $table->string('abs_zone_region_in');
             $table->string('abs_zone_time_in');
             $table->string('status_check_in');
-            
+
             // Foreign Key
             $table->foreign('task_id')->references('task_id')->on('tbl_task')->onDelete('cascade');
             $table->foreign('abs_emp_id')->references('emp_id')->on('emp_person')->onDelete('cascade');

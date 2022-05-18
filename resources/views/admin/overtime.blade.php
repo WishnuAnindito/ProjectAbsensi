@@ -24,13 +24,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($overtime as $over)
+                    <tr>
+                        <th scope="row">{{$over->abs_date}}</th>
+                        <td>{{$over->emp_full_name}}</td>
+                        <td>{{$over->abs_time}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>    
+                @endforeach
             </tbody>
         </table>
     </div>

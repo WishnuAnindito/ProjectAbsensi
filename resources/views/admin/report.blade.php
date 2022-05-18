@@ -24,13 +24,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($report as $rep)
+                    <tr>
+                        <th scope="row">{{$rep->abs_date}}</th>
+                        <td><{{$rep->emp_full_name}}/td>
+                        <td>{{$rep->task_name}}</td>
+                        <td>{{$rep->status_check_in}}</td>
+                        <td>{{$rep->status_check_out}}</td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
@@ -40,7 +42,7 @@
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
     <script type="text/javascript">
         $(document).ready( function () {
-        $('#overtime').DataTable();
+        $('#report').DataTable();
         } );
     </script>
 @endsection

@@ -15,11 +15,12 @@ class DivisionSeeder extends Seeder
      */
     public function run()
     {
-        $division = ['Finance','HRGA','NOC','Logistic','Marketing','Operation VSAT','Product',
-        'Services','Help Desk','Admin Hub', 'BOD', 'QMR', 'Bitnet', 'Workshop', 'EOS', 'Purchasing'
+        $division = [
+            'Finance', 'HRGA', 'NOC', 'Logistic', 'Marketing', 'Operation VSAT', 'Product',
+            'Services', 'Help Desk', 'Admin Hub', 'BOD', 'QMR', 'Bitnet', 'Workshop', 'EOS', 'Purchasing'
         ];
 
-        foreach ($division as $div){
+        foreach ($division as $div) {
             DB::table('tbl_division')->insert([
                 'division_name' => $div
             ]);

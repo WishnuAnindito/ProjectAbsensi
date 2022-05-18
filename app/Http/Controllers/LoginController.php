@@ -27,7 +27,7 @@ class LoginController extends Controller
             'user_name' => $request->user_name,
             'password' => $request->user_pass
         ];
-
+        // dd($credentials);
         // Validasi akun dengan database
         // dd(Auth::attempt($credentials));
         if(Auth::attempt($credentials)){

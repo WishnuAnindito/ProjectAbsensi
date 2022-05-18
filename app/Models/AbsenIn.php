@@ -9,15 +9,18 @@ class AbsenIn extends Model
 {
     protected $table = 'abs_in';
 
-    public function absen(){
+    public function absen()
+    {
         return $this->hasOne(Absen::class, 'abs_in_id', 'abs_in_id');
     }
-    
-    public function absenOut(){
+
+    public function absenOut()
+    {
         return $this->hasOne(AbsenOut::class, 'abs_in_id', 'abs_in_id');
     }
-    
-    public function employee(){
+
+    public function employee()
+    {
         return $this->belongsTo(Employee::class, 'abs_emp_id', 'emp_id');
     }
 

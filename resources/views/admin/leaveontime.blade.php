@@ -24,13 +24,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                @foreach ($leaveontime as $lontime)
+                    <tr>
+                        <th scope="row">{{$lontime->abs_date}}</th>
+                        <td>{{$lontime->emp_full_name}}</td>
+                        <td>{{$lontime->abs_time}}</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                @endforeach
             </tbody>
         </table>
     </div>

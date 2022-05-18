@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('user_name');
             $table->string('user_pass');
             $table->foreignId('user_grade');
+
             $table->foreign('emp_id')->references('emp_id')->on('emp_person')->ondelete('cascade');
             $table->foreign('user_grade')->references('grade_id')->on('tbl_grade')->ondelete('cascade');
         });

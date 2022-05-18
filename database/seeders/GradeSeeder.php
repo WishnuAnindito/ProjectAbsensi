@@ -15,16 +15,9 @@ class GradeSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('tbl_grade')->insert(['grade_name' => 'XCIX']);
-        DB::table('tbl_grade')->insert(['grade_name' => 'I']);
-        DB::table('tbl_grade')->insert(['grade_name' => 'II']);
-        DB::table('tbl_grade')->insert(['grade_name' => 'III']);
-        DB::table('tbl_grade')->insert(['grade_name' => 'IV']);
-        DB::table('tbl_grade')->insert(['grade_name' => 'V']);
-        DB::table('tbl_grade')->insert(['grade_name' => 'VI']);
-        DB::table('tbl_grade')->insert(['grade_name' => 'VII']);
-        DB::table('tbl_grade')->insert(['grade_name' => 'VIII']);
-        DB::table('tbl_grade')->insert(['grade_name' => 'IX']);
-        DB::table('tbl_grade')->insert(['grade_name' => 'X']);
+        $grade = ['XCIX', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+        foreach ($grade as $gr) {
+            DB::table('tbl_grade')->insert(['grade_name' => $gr]);
+        }
     }
 }

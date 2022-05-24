@@ -34,7 +34,7 @@ class TaskSeeder extends Seeder
         $zone_time = ['WIB', 'WITA', 'WIT'];
 
 
-        for ($i = 0; $i < 1000; $i++) {
+        for ($i = 0; $i < 500; $i++) {
             DB::table('tbl_task')->insert([
                 'task_assign_by' => $faker->randomElement($leader),
                 'task_assign_to' => $faker->randomElement($employee),

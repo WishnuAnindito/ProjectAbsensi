@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\AbsenIn;
 use App\Models\Employee;
 use App\Models\Task;
 use App\Models\User;
-use Barryvdh\DomPDF\PDF;
+// use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
@@ -96,7 +97,6 @@ class AdmAttendanceController extends Controller
         return view('admin.latetime', ['latetime' => $late_time_employee]);
     }
 
-
     public function leaveEarlyEmployee()
     {
         $today = Carbon::now()->format('Y-m-d');
@@ -149,32 +149,19 @@ class AdmAttendanceController extends Controller
 
     public function weeklyAttendance()
     {
-        $ind = CarbonImmutable::now()->locale('id');
-        $start_of_Attendance = $ind->startOfWeek(Carbon::MONDAY);
-        $end_of_Attendance = $ind->endOfWeek(Carbon::SUNDAY);
+        // $ind = CarbonImmutable::now()->locale('id');
+        // $start_of_Attendance = $ind->startOfWeek(Carbon::MONDAY);
+        // $end_of_Attendance = $ind->endOfWeek(Carbon::SUNDAY);
 
-        $report_data = DB::table('absen', 'abs')
-            ->select('abs.abs_date', 'person.emp_full_name', 'tsk.task_name', 'absIn.status_check_in', 'absOut.status_check_out')
-            ->join('emp_person as person', 'abs.abs_emp_id', '=', 'person.emp_id')
-            ->join('abs_in as absIn', 'abs.abs_in_id', '=', 'absIn.abs_in_id')
-            ->join('abs_out as absOut', 'abs.abs_out_id', '=', 'absOut.abs_out_id')
-            ->join('tbl_task as tsk', 'abs.abs_emp_id', '=', 'tsk.task_assign_to')
-            ->whereBetween('abs.abs_date', [$start_of_Attendance, $end_of_Attendance], 'and')
-            ->get();
+        // $report_data = DB::table('absen', 'abs')
+        //     ->select('abs.abs_date', 'person.emp_full_name', 'tsk.task_name', 'absIn.status_check_in', 'absOut.status_check_out')
+        //     ->join('emp_person as person', 'abs.abs_emp_id', '=', 'person.emp_id')
+        //     ->join('abs_in as absIn', 'abs.abs_in_id', '=', 'absIn.abs_in_id')
+        //     ->join('abs_out as absOut', 'abs.abs_out_id', '=', 'absOut.abs_out_id')
+        //     ->join('tbl_task as tsk', 'abs.abs_emp_id', '=', 'tsk.task_assign_to')
+        //     ->whereBetween('abs.abs_date', [$start_of_Attendance, $end_of_Attendance], 'and')
+        //     ->get();
 
-        return view('admin.report', ['report' => $report_data]);
-    }
-
-    public function attendanceWeeklyReport()
-    {
-        // $data = [
-        //     'title' => 'Welcome to ItSolutionStuff.com',
-        //     'date' => date('m/d/Y')
-        // ];
-
-        // $pdf = PDF::loadView('myPDF', $data);
-
-        // return $pdf->download('itsolutionstuff.pdf');
-        // return view('admin.report');
+        // return view('admin.report', ['report' => $report_data]);
     }
 }

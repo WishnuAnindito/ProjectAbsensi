@@ -2,7 +2,7 @@
 
 use App\Http\Controllers;
 use App\Http\Controllers\Admin\AdmAttendanceController;
-
+use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Employee\AttendanceController;
 use App\Http\Controllers\Employee\DashboardController;
 use App\Http\Controllers\Employee\EmpAttendanceController;
@@ -45,6 +45,11 @@ Route::controller(AdmAttendanceController::class)->group(function () {
 
     // Report 
     Route::get('/admin/weeklyreport', 'weeklyAttendance')->name('weekly-report-admin');
+
+});
+
+Route::controller(EmployeeController::class)->group(function () {
+    Route::get('/admin/addemployee', 'index')->name('add-new-employee-page');
 });
 
 Route::controller(LeaderController::class)->group(function () {

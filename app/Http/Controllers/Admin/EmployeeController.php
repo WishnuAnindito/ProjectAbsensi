@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
-class AdmEmployeeController extends Controller
+class EmployeeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,10 @@ class AdmEmployeeController extends Controller
      */
     public function index()
     {
-        return view('admin.addUser');
+        $departments = DB::table('tbl_department')->get();
+        $divisions = DB::table('tbl_division')->get();
+        $positions = DB::table('tbl_position')->get();
+        return view('admin.newemployee', ['departments' => $departments, 'divisions' => $divisions, 'positions' => $positions]);
     }
 
     /**

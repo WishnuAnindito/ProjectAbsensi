@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -173,5 +174,202 @@ class AttendanceController extends Controller
     function sendNotif($emp_name, $emp_lead, $lead_number){
 
     }
-   
+
+    // New BackEnd
+    public function empDashboard()
+    {
+        $id = Auth::user()->emp_id;
+        $today = Carbon::now()->toDateString();
+        $attendance_total = Absen::where('abs_emp_id', '=', $id)->count();
+        $task_today_total = Task::where('task_assign_to', '=', $id)->where('task_date', '=', $today)->count();
+        // $task_today = Task::where('task_assign_to', '=', $id)->where('task_date', '=', $today)->get();
+        $task_today = Task::where([
+            ['task_assign_to', '=', $id],
+            ['task_date', '=', $today]
+        ])->get();
+
+        return view('employee.dashboard', [
+            'tsk_today' => $task_today,
+            'tsk_today_total' => $task_today_total,
+            'attendance_total' => $attendance_total
+        ]);
+    }
+
+    public function empCheckIn(Request $request, $task_id)
+    {
+        /*
+            protected $fillable = [
+                'abs_emp_id', (auto)
+                'abs_date', (auto)
+                'abs_time', (auto)
+                'abs_reason', (input)
+                'abs_latitude_in', (auto)
+                'abs_longitude_in', (auto)
+                'abs_address_in', (auto)
+                'abs_zone_region_in', (auto)
+                'abs_zone_time_in', (auto)
+                'status_check_in' (coding)
+            ];
+        */
+        $id = Auth::user()->emp_id;
+        $task = Task::where('task_id', '=', $task_id)->get();
+
+        $request->validate([
+            'abs_reason' => 'required|string'
+        ]);
+
+        $absenIn = new AbsenIn();
+        $absenIn->abs_emp_id = $id;
+        $absenIn->abs_date = $request->abs_date;
+        $absenIn->abs_time = $request->abs_time;
+        $absenIn->abs_reason = $request->abs_reason;
+        $absenIn->abs_latitude_in = $request->abs_latitude_in;
+        $absenIn->abs_longitude_in = $request->abs_longitude_in;
+        $absenIn->abs_address_in = $request->abs_address_in;
+        $absenIn->abs_zone_region_in = $request->abs_zone_region_in;
+        $absenIn->abs_zone_time_in = $request->abs_zone_time_in;
+        if ($request->abs_time > $task->task_start_time) {
+            $absenIn->status_check_in = 'Late';
+        } else {
+            $absenIn->status_check_in = 'On Time';
+        }
+
+        // $absenIn->save();
+        if ($absenIn->save()) {
+            return redirect()->back()->with('Success', 'Anda Berhasil Melakukan Check In');
+        } else {
+            return redirect()->back()->with('Failed', 'Anda Gagal Melakukan Check In');
+        }
+    }
+
+    public function empCheckOut(Request $request, $task_id, $abs_in_id)
+    {
+        /*
+            protected $fillable = [
+                'abs_emp_id', (auto)
+                'abs_in_id', (auto)
+                'abs_date', (auto)
+                'abs_time', (auto)
+                'abs_reason', (input)
+                'abs_latitude_out', (auto)
+                'abs_longitude_out', (auto)
+                'abs_address_out', (auto)
+                'abs_zone_region_out', (auto)
+                'abs_zone_time_out', (auto)
+                'status_check_out' (coding)
+            ];
+        */
+        $id = Auth::user()->emp_id;
+        $task = Task::where('task_id', '=', $task_id)->get();
+
+        $request->validate([
+            'abs_reason' => 'required|string'
+        ]);
+
+        $absenOut = new AbsenOut();
+        $absenOut->abs_emp_id = $id;
+        $absenOut->abs_in_id = $abs_in_id;
+        $absenOut->abs_date = $request->abs_date;
+        $absenOut->abs_time = $request->abs_time;
+        $absenOut->abs_reason = $request->abs_reason;
+        $absenOut->abs_latitude_out = $request->abs_latitude_out;
+        $absenOut->abs_longitude_out = $request->abs_longitude_out;
+        $absenOut->abs_address_out = $request->abs_address_out;
+        $absenOut->abs_zone_region_out = $request->abs_zone_region_out;
+        $absenOut->abs_zone_time_out = $request->abs_zone_time_out;
+        if ($request->abs_time > $task->task_start_time) {
+            $absenOut->status_check_Out = 'On Time';
+        } else {
+            $absenOut->status_check_Out = 'Leave Earlier';
+        }
+
+        // $absenOut->save();
+        if ($absenOut->save()) {
+            return redirect()->back()->with('Success', 'Anda Berhasil Melakukan Check Out');
+        } else {
+            return redirect()->back()->with('Failed', 'Anda Gagal Melakukan Check Out');
+        }
+    }
+
+
+    public function empProfile($user_id)
+    {
+        /*
+            Date Hired belum tersedia
+        */
+
+        $ind_zone = CarbonImmutable::now()->locale('id');
+        $weekStartDate = $ind_zone->startOfWeek(Carbon::MONDAY);
+        $weekEndDate = $ind_zone->endOfWeek(CARBON::SUNDAY);
+
+        // $id = Auth::user()->emp_id;
+
+        $task = Task::where('task_assign_to', '=', $user_id)->get();
+        $task_total = Task::whereBetween('task_date', [$weekStartDate, $weekEndDate])->where('task_assign_to', '=', $user_id)->count();
+        $work_hour = DB::table('absen', 'abs')
+            ->select(DB::raw('SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(absOut.abs_time, absIn.abs_time)))) as workHour'))
+            ->join('abs_in as absIn', 'abs.abs_in_id', '=', 'absIn.abs_in_id')
+            ->join('abs_out as absOut', 'abs.abs_out_id', '=', 'absOut.abs_out_id')
+            ->whereBetween('abs.abs_date', [$weekStartDate, $weekEndDate])
+            ->where('abs.abs_emp_id', '=', 40)
+            ->get();
+
+        // dd($weekStartDate, $weekEndDate);
+
+        $employee_data = DB::table('emp_position', 'post')
+            ->selet(
+                'emp.emp_full_name',
+                'pos.pos_name',
+                'dpt.dept_name',
+                'emp2.emp_full_name',
+                'div.division_name',
+                'emp3.emp_full_name',
+
+            )
+            ->join('emp_person as emp', 'post.emp_id', '=', 'emp.emp_id')
+            ->join('tbl_position as pos', 'post.emp_position', '=', 'pos.pos_id')
+            ->join('tbl_department as dpt', 'post.emp_department', '=', 'dpt.dept_id')
+            ->join('tbl_division as div', 'pos.emp_division', '=', 'div.division_id')
+            ->join('emp_person as emp2', 'post.emp_coach', '=', 'emp2.emp_id')
+            ->join('emp_person as emp3', 'post.emp_manager', '=', 'emp3.emp_id')
+            ->where('post.emp_id', '=', $user_id)
+            ->get();
+
+        return view('employee.profile');
+    }
+
+
+    public function history($emp_id)
+    {
+        $attendance_history_data = DB::table('absen', 'abs')
+            ->select('abs.abs_date', 'emp.emp_full_name', 'tsk.task_name', 'in.status_check_in', 'out.status_check_out')
+            ->join('abs_in as in', 'abs.abs_in_id', '=', 'in.abs_in_id')
+            ->join('abs_out as out', 'abs.abs_out_id', '=', 'out.abs_out_id')
+            ->join('tbl_task as tsk', 'in.task_id', '=', 'tsk.task_id')
+            ->join('emp_person as emp', 'abs.abs_emp_id', '=', 'emp.emp_id')
+            ->where('abs.emp_id', '=', $emp_id)
+            ->orderBy('abs.abs_date', 'desc')
+            ->get();
+
+        // dd($attendance_history_data);
+        return view('employee.attendancehistory', [
+            'absen' => $attendance_history_data
+        ]);
+    }
+
+    public function weeklyTask($emp_id)
+    {
+        $ind_zone = CarbonImmutable::now()->locale('id');
+        $weekStartDate = $ind_zone->startOfWeek(Carbon::MONDAY);
+        $weekEndDate = $ind_zone->endOfWeek(CARBON::SUNDAY);
+
+        $task = Task::where([
+            ['task_assign_to', '=', $emp_id],
+            ['task_date', 'BETWEEN', $weekStartDate . " and " . $weekEndDate]
+        ])->get();
+
+        return view('employee.weeklyTask', [
+            'task' => $task
+        ]);
+    }
 }

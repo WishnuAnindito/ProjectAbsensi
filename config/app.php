@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Attendance Tangara Mitrakom'),
 
     /*
     |--------------------------------------------------------------------------
@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'id',
 
     /*
     |--------------------------------------------------------------------------
@@ -108,7 +108,7 @@ return [
     |
     */
 
-    'faker_locale' => 'en_US',
+    'faker_locale' => 'id_ID',
 
     /*
     |--------------------------------------------------------------------------
@@ -167,6 +167,7 @@ return [
         * Package Service Providers...
         */
 
+        // PDF Service
         // Barryvdh\DomPDF\ServiceProvider::class,
         /*
         * Application Service Providers...
@@ -177,6 +178,8 @@ return [
         // App\Libraries\HashServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        // Indonesian Database or API Provider
         Laravolt\Indonesia\ServiceProvider::class,
         // Cornford\Googlmapper\MapperServiceProvider::class,   
     ],

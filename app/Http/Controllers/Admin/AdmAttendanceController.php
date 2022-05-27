@@ -149,19 +149,22 @@ class AdmAttendanceController extends Controller
 
     public function weeklyAttendance()
     {
-        // $ind = CarbonImmutable::now()->locale('id');
-        // $start_of_Attendance = $ind->startOfWeek(Carbon::MONDAY);
-        // $end_of_Attendance = $ind->endOfWeek(Carbon::SUNDAY);
+        $ind = CarbonImmutable::now()->locale('id');
+        $start_of_Attendance = $ind->startOfWeek(Carbon::MONDAY);
+        $end_of_Attendance = $ind->endOfWeek(Carbon::SUNDAY);
 
-        // $report_data = DB::table('absen', 'abs')
-        //     ->select('abs.abs_date', 'person.emp_full_name', 'tsk.task_name', 'absIn.status_check_in', 'absOut.status_check_out')
-        //     ->join('emp_person as person', 'abs.abs_emp_id', '=', 'person.emp_id')
-        //     ->join('abs_in as absIn', 'abs.abs_in_id', '=', 'absIn.abs_in_id')
-        //     ->join('abs_out as absOut', 'abs.abs_out_id', '=', 'absOut.abs_out_id')
-        //     ->join('tbl_task as tsk', 'abs.abs_emp_id', '=', 'tsk.task_assign_to')
-        //     ->whereBetween('abs.abs_date', [$start_of_Attendance, $end_of_Attendance], 'and')
-        //     ->get();
+        $report_data = DB::table('absen', 'abs')
+            ->select('abs.abs_date', 'person.emp_full_name', 'tsk.task_name', 'absIn.status_check_in', 'absOut.status_check_out')
+            ->join('emp_person as person', 'abs.abs_emp_id', '=', 'person.emp_id')
+            ->join('abs_in as absIn', 'abs.abs_in_id', '=', 'absIn.abs_in_id')
+            ->join('abs_out as absOut', 'abs.abs_out_id', '=', 'absOut.abs_out_id')
+            ->join('tbl_task as tsk', 'abs.abs_emp_id', '=', 'tsk.task_assign_to')
+            ->whereBetween('abs.abs_date', [$start_of_Attendance, $end_of_Attendance], 'and')
+            ->get();
 
-        // return view('admin.report', ['report' => $report_data]);
+        return view('admin.report', ['report' => $report_data]);
     }
+
+
+    
 }

@@ -8,25 +8,8 @@
           <li class="{{ request()->routeIs('dashboard-admin') ? 'active' : '' }}">
               <a href="{{route('dashboard-admin')}}">Dashboard</a>
             </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" href="#employeeDropdown" data-bs-toggle="collapse" aria-expanded="false">Employee</a>
-                <ul class="collapse list-unstyled" id="employeeDropdown">
-                    <li class="{{ request()->routeIs('employee-list-admin') ? 'active' : '' }}">
-                        <a href="{{route('employee-list-admin')}}">Employee List</a>
-                    </li>
-                    <li class="{{ request()->routeIs('add-new-employee-page') ? 'active' : '' }}">
-                        <a href="{{route('add-new-employee-page')}}">New Employee</a>
-                    </li>
-                    <li class="{{ request()->routeIs('leave-early-admin') ? 'active' : '' }}">
-                        <a href="{{route('leave-early-admin')}}">Leave Early</a>
-                    </li>
-                    <li class="{{ request()->routeIs('leave-on-time-admin') ? 'active' : '' }}">
-                        <a href="{{route('leave-on-time-admin')}}">Leave On Time</a>
-                    </li>
-                    <li class="{{ request()->routeIs('over-time-admin') ? 'active' : '' }}">
-                        <a href="{{route('over-time-admin')}}">Overtime</a>
-                    </li>
-                </ul>
+          <li class="{{ request()->routeIs('employee-list-admin') ? 'active' : '' }}">
+              <a href="{{route('employee-list-admin')}}">Employee</a>
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" href="#historyDropdown" data-bs-toggle="collapse" aria-expanded="false">History</a>
@@ -64,10 +47,9 @@
 
     <!-- Page Content  -->
     <div id="content">
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-lg navbar-info bg-info mb-0">
             <div class="container-fluid">
-
-                <button type="button" id="sidebarCollapse" class="btn btn-dark">
+                <button type="button" id="sidebarCollapse" class="btn btn-info">
                     <i class="fas fa-align-left"></i>
                 </button>
             </div>

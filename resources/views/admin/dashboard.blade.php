@@ -1,6 +1,10 @@
 @extends('layouts.template')
 @section('title', 'Admin Dashboard')
 
+@section('css')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.css"/>
+@endsection
+
 @section('nav')
 @extends('layouts.navigation-bar-admin')
 @section('content')
@@ -49,36 +53,50 @@
       </div>
     </div>
   </div>
-  <hr class="mt-5 mb-1">
-  <div class="container">
+  <hr class="mt-5 mb-2">
+  {{-- <div class="container">
     <div class="fs-2 text-center" id="date"></div>
     <div class="fs-2 text-center" id="time"></div>
+  </div> --}}
+  {{-- <hr class="mt-1 mb-2"> --}}
+  <h3 class="ms-2">Attendance Logs</h3>
+  <div class="container position-relative px-5 overflow-auto">
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th scope="col">Date</th>
+          <th scope="col">Employee Name</th>
+          <th scope="col">Check In Time</th>
+          <th scope="col">Check Out Time</th>
+          <th scope="col">Work Duration</th>
+          <th scope="col">Overtime</th>
+          <th scope="col">Status</th>
+          <th scope="col">Review</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{-- @foreach ($data[3] as $employee)  
+          <tr>
+            <th scope="row">{{$employee->abs_date}}</th>
+            <th>{{$employee->emp_full_name}}</th>
+            <th>{{$employee->check_in_time}}</th>
+            <th>{{$employee->check_out_time}}</th>
+            <th>{{$employee->work_duration}}</th>
+            <th>{{$employee->overtime}}</th>
+            <th>{{$employee->status}}</th>
+            <th><a href="{{route('review-employees', [$employee->emp_id])}}">Review</a></th>
+          </tr>
+        @endforeach --}}
+      </tbody>
+    </table>
   </div>
-  <hr class="mt-1 mb-2">
-  <div class="overflow-hidden position-absolute pt-2" style="height:100%; width:100%; box-sizing:border-box;"> 
-  </div>
-  <div class="container border border-3 border-dark position-relative px-5 overflow-auto">
-    <h3 class="text-center"><u>Technician Attendance</u></h3>
-    @foreach ($data[3] as $employee)
-      <div class="row border border-4 border-dark mb-3" style="background: #A3ECE8">
-        <div class="col-sm-2">
-          <img src="" alt="" class="rounded-circle">
-        </div>
-        <div class="col-sm-6">
-          <h5 class="mt-2">{{$employee->emp_full_name}}</h5>
-          <hr>
-          <h5>{{$employee->pos_name}}</h5>
-        </div>
-        <div class="col-sm-2">
-          <h5 class="text-center mt-4" style="color: #F8990B">task code</h5>
-        </div>
-        <div class="col-sm-2">
-          <h5 class="text-center mt-4" style="color: #128510">ontime/late</h5>
-        </div>
-      </div>
-    @endforeach
-    {{-- @foreach ($data[3] as $employee)
-    @endforeach --}}
-    
-  </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.5/datatables.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready( function () {
+        $('#ontime').DataTable({responsive: true});
+        } );
+    </script>
 @endsection

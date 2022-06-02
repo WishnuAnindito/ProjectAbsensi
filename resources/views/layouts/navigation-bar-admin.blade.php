@@ -8,8 +8,16 @@
           <li class="{{ request()->routeIs('dashboard-admin') ? 'active' : '' }}">
               <a href="{{route('dashboard-admin')}}">Dashboard</a>
             </li>
-          <li class="{{ request()->routeIs('employee-list-admin') ? 'active' : '' }}">
-              <a href="{{route('employee-list-admin')}}">Employee</a>
+            <li class="dropdown">
+                <a class="dropdown-toggle" href="#employeeDropdown" data-bs-toggle="collapse" aria-expanded="false">Employee</a>
+                <ul class="collapse list-unstyled" id="employeeDropdown">
+                    <li class="{{ request()->routeIs('employee-list-admin') ? 'active' : '' }}">
+                        <a href="{{route('employee-list-admin')}}">Employee List</a>
+                    </li>
+                    <li class="{{ request()->routeIs('over-time-admin') ? 'active' : '' }}">
+                        <a href="{{route('over-time-admin')}}">Overtime</a>
+                    </li>
+                </ul>
             </li>
             <li class="dropdown">
                 <a class="dropdown-toggle" href="#historyDropdown" data-bs-toggle="collapse" aria-expanded="false">History</a>
@@ -26,9 +34,7 @@
                     <li class="{{ request()->routeIs('leave-on-time-admin') ? 'active' : '' }}">
                         <a href="{{route('leave-on-time-admin')}}">Leave On Time</a>
                     </li>
-                    <li class="{{ request()->routeIs('over-time-admin') ? 'active' : '' }}">
-                        <a href="{{route('over-time-admin')}}">Overtime</a>
-                    </li>
+    
                 </ul>
             </li>
             <li class="{{ request()->routeIs('weekly-report-admin') ? 'active' : '' }}">

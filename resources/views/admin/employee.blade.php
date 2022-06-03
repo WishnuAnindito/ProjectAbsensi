@@ -19,7 +19,7 @@
                 </form>
             </div>
             <div class="col-sm-2">
-                <a href="" class="btn text-dark" style="background-color:#5EE95B">+ New</a>
+                <a href="{{route('add-new-employee-page')}}" class="btn text-dark" style="background-color:#5EE95B">+ New</a>
             </div>
         </div>
         <div class="row mb-3">
@@ -28,9 +28,9 @@
                   Job Title
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="titleDropdown">
-                    {{-- @foreach ($titles as $title)
-                        <li><a class="dropdown-item" href="#"></a></li>    
-                    @endforeach --}}
+                    @foreach ($position as $title)
+                        <li><a class="dropdown-item" href="#">{{$title->pos_name}}</a></li>    
+                    @endforeach
                 </ul>
               </div>
             <div class="dropdown col-auto">
@@ -38,15 +38,15 @@
                   Department
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="departmentDropdown">
-                    {{-- @foreach ($titles as $title)
-                        <li><a class="dropdown-item" href="#"></a></li>    
-                    @endforeach --}}
+                    @foreach ($department as $dpt)
+                        <li><a class="dropdown-item" href="#">{{$dpt->dept_name}}</a></li>    
+                    @endforeach
                 </ul>
               </div>
         </div>
         <div class="row">
             <div class="col-sm-10">
-                <h3 class="ms-3">1000 Employees</h3>
+                <h3 class="ms-3">{{$total_employee}} Employees</h3>
             </div>
             <div class="col-sm-2">
                 <select class="pe-3" name="sort_by" id="sort_by">
@@ -56,20 +56,20 @@
             </div>
         </div>
         <div class="row">
-            @for ($i = 0; $i < 50; $i++)
+            @foreach ($employees as $employee)
                 <div class="col-sm-3 mb-4">
-                    <a href="#">
-                        <div class="card">
+                    <a href="{{route('employee-details', $employee->emp_id)}}">
+                        <div class="card" style="height: 100%">
                             <img src="{{Storage::url('images/yugioh.png')}}" class="card-img-top" alt="">
                             <div class="card-body">
-                                <h5 class="card-title fw-bold">Emp_full_name</h5>
-                                <p class="card-text">Title</p>
-                                <p class="card-text">email</p>
+                                <h5 class="card-title fw-bold">{{$employee->emp_full_name}}</h5>
+                                <p class="card-text">{{$employee->pos_name}}</p>
+                                <p class="card-text">{{$employee->emp_email_office}}</p>
                             </div>
                         </div>
                     </a>
                 </div>    
-            @endfor
+            @endforeach
         </div>
     </div>
 @endsection

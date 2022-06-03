@@ -27,13 +27,41 @@
             <p class="ms-4 text-dark"><span style="font-weight: 500">Last Name : </span>emp_last_name</p>
             <p class="ms-4 text-dark"><span style="font-weight: 500">Birth Date : </span>emp_birth_date</p>
             <p class="fw-bold text-dark my-2">Contact Information : </p>
-            <p class="ms-4 text-dark"><span style="font-weight: 500">Contact : </span>emp_phone_number</p> 
+            <p class="ms-4 text-dark">
+                <span style="font-weight: 500">Contact : </span>
+                <input type="text" class="form-control" name="emp_phone_number" id="emp_phone_number" placeholder="emp_phone_number">
+            </p>
             <p class="fw-bold text-dark my-2">Employee Information : </p>
-            <p class="ms-4 text-dark"><span style="font-weight: 500">Department : </span>emp_department</p> 
-            <p class="ms-4 text-dark"><span style="font-weight: 500">Division : </span>emp_division</p>
-            <p class="ms-4 text-dark"><span style="font-weight: 500">Position : </span>emp_position</p>
-            <p class="ms-4 text-dark"><span style="font-weight: 500">Leader : </span>emp_coach</p>
-            <p class="ms-4 text-dark"><span style="font-weight: 500">Manager : </span>emp_manager</p>
+            <p class="ms-4 text-dark">
+                <span style="font-weight: 500">Department : </span>
+                <select class="form-select" name="emp_department" id="emp_department">
+                    <option value="" selected disabled>emp_department</option>
+                </select>
+            </p> 
+            <p class="ms-4 text-dark">
+                <span style="font-weight: 500">Division : </span>
+                <select class="form-select" name="emp_division" id="emp_division">
+                    <option value="" selected disabled>emp_division</option>
+                </select>
+            </p>
+            <p class="ms-4 text-dark">
+                <span style="font-weight: 500">Position : </span>
+                <select class="form-select" name="emp_position" id="emp_position">
+                    <option value="" selected disabled>emp_position</option>
+                </select>
+            </p>
+            <p class="ms-4 text-dark">
+                <span style="font-weight: 500">Leader : </span>
+                <select class="form-select" name="emp_coach" id="emp_coach">
+                    <option value="" selected disabled>emp_coach</option>
+                </select>
+            </p>
+            <p class="ms-4 text-dark">
+                <span style="font-weight: 500">Manager : </span>
+                <select class="form-select" name="emp_manager" id="emp_manager">
+                    <option value="" selected disabled>emp_manager</option>
+                </select>
+            </p>
             <p class="fw-bold text-dark my-2">Additional Information : </p>
             <p class="ms-4 text-dark"><span style="font-weight: 500">Attendance : </span>emp_total_attendance</p> 
             <p class="ms-4 text-dark"><span style="font-weight: 500">Daily Attendance : </span>emp_daily_attendance</p>
@@ -44,9 +72,7 @@
                 Action
             </div>
             <div class="border border-dark text-center" style="width:40%">
-                <a href="" style="color: #0A3E65"><i class="fa-solid fa-pen-to-square"></i> Edit Profile</a>
-                <br>
-                <a href="#" style="color: #D12B2B"><i class="fa-solid fa-trash-can"></i> Delete Profile</a>
+                <button type="submit" class="btn btn-primary my-2" style="border-radius:16px">Save Edited</button>
             </div>
         </div>
     </div>

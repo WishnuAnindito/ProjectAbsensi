@@ -15,10 +15,7 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        $departments = DB::table('tbl_department')->get();
-        $divisions = DB::table('tbl_division')->get();
-        $positions = DB::table('tbl_position')->get();
-        return view('admin.newemployee', ['departments' => $departments, 'divisions' => $divisions, 'positions' => $positions]);
+        
     }
 
     /**

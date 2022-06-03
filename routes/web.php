@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers;
+// use App\Http\Controllers;
 use App\Http\Controllers\Admin\AdmAttendanceController;
+use App\Http\Controllers\Admin\AdmEmployeeController;
 use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Employee\AttendanceController;
 use App\Http\Controllers\Employee\DashboardController;
@@ -10,9 +11,6 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Leader\LeaderController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Mail\MailController;
-use App\Models\Absen;
-use App\Models\Division;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -36,9 +34,9 @@ Route::get('/send-email', [MailController::class, 'sendEmail']);
 Route::controller(AdmAttendanceController::class)->group(function () {
     // Dashboard
     Route::get('/admin/dashboard', 'adminDashboard')->name('dashboard-admin');
+    // ->middleware('auth');
 
     // All List
-    Route::get('/admin/employeelist', 'employeeList')->name('employee-list-admin');
     Route::get('/admin/ontimelist', 'onTimeEmployee')->name('on-time-admin');
     Route::get('/admin/latetimelist', 'lateTimeEmployee')->name('late-time-admin');
     Route::get('/admin/leaveearlylist', 'leaveEarlyEmployee')->name('leave-early-admin');
@@ -47,13 +45,14 @@ Route::controller(AdmAttendanceController::class)->group(function () {
 
     // Report 
     Route::get('/admin/weeklyreport', 'weeklyAttendance')->name('weekly-report-admin');
-
-    Route::get('/admin/employee/details', 'employeeDetails')->name('employee-details');
-
 });
 
-Route::controller(EmployeeController::class)->group(function () {
-    Route::get('/admin/addemployee', 'index')->name('add-new-employee-page');
+// Admin to Manage Employee
+Route::controller(AdmEmployeeController::class)->group(function (){
+    Route::get('/admin/employee', 'employeeList')->name('employee-list-admin');
+    Route::get('/admin/employee/details/{id}', 'employeeDetails')->name('employee-details');
+    Route::get('/admin/employee/details/{id}/edit', 'employeeDetailsEdit')->name('employee-details-edit');
+    Route::get('/admin/employee/new', 'createNewEmployee')->name('add-new-employee-page');
 });
 
 Route::controller(LeaderController::class)->group(function () {

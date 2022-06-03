@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="/css/login.css">
     <link rel="stylesheet" href="/css/dashboard.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <style>
+        body{
+            background-color: #ffffff;
+        }
+    </style>
     @yield('css')
     <title>@yield('title')</title>
 </head>

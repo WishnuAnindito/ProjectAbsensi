@@ -1,9 +1,8 @@
-<?php
+c<?php
 
 // use App\Http\Controllers;
 use App\Http\Controllers\Admin\AdmAttendanceController;
 use App\Http\Controllers\Admin\AdmEmployeeController;
-use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Employee\AttendanceController;
 use App\Http\Controllers\Employee\DashboardController;
 use App\Http\Controllers\Employee\EmpAttendanceController;
@@ -45,6 +44,8 @@ Route::controller(AdmAttendanceController::class)->group(function () {
 
     // Report 
     Route::get('/admin/weeklyreport', 'weeklyAttendance')->name('weekly-report-admin');
+    
+    Route::get('admin/details', 'attendanceDetailsTest')->name('attendance');
 });
 
 // Admin to Manage Employee
@@ -70,6 +71,10 @@ Route::controller(LeaderController::class)->group(function () {
     Route::get('/leader/create-task', 'createTask')->name('create-task');
 });
 
+Route::controller(EmpAttendanceController::class)->group(function (){
+    Route::get('/employee/dashboard', 'employeeDashboardtest')->name('dashboard-employee');
+});
+
 // Page for Guest Only
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
@@ -83,8 +88,6 @@ Route::middleware('auth')->group(function () {
 
 
 // Gk Kepake
-Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance');
+Route::get('/attendance', [EmpAttendanceController::class, 'employeeDashboard']);
 Route::post('/checkinattendance', [AttendanceController::class, 'checkInStore'])->name('check-in');
 Route::post('/checkoutattendance', [AttendanceController::class, 'checkOutStore'])->name('check-out');
-Route::get('/seeder', function(){
-});

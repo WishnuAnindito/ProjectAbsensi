@@ -3,12 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreEmployeeRequest;
+use App\Http\Requests\UpdateEmployeeRequest;
 use App\Models\Absen;
 use App\Models\Department;
 use App\Models\Division;
 use App\Models\Employee;
+use App\Models\EmpPost;
 use App\Models\Position;
 use App\Models\Task;
+use App\Models\User;
 use Carbon\Carbon;
 use Carbon\CarbonImmutable;
 use Illuminate\Http\Request;
@@ -44,52 +48,28 @@ class AdmEmployeeController extends Controller
     }
 
     public function employeeDetails($id){
-        $today = Carbon::now()->toDateString();
-        $ind = CarbonImmutable::now()->locale('id');
-        $start_of_Attendance = $ind->startOfWeek(Carbon::MONDAY);
-        $end_of_Attendance = $ind->endOfWeek(Carbon::SUNDAY);
+        $absen = new Absen();
+        $today = $absen->getDate('today');
+        $start_of_Attendance = $absen->getDate('monday');
+        $end_of_Attendance = $absen->getDate('sunday');
 
-        $emp_details = DB::table('emp_position', 'pos')
-            ->select(
-                'pos.emp_id',
-                'emp.emp_birth_date',
-                'emp.emp_phone',
-                'dpt.dept_name',
-                'div.division_name',
-                'post.pos_name',
-                'emp2.emp_full_name as leader',
-                'emp3.emp_full_name as manager',
-            )
-            ->join('emp_person as emp', 'pos.emp_id', '=', 'emp.emp_id') 
-            ->join('emp_person as emp2', 'pos.emp_coach', '=', 'emp2.emp_id') 
-            ->join('emp_person as emp3', 'pos.emp_manager', '=', 'emp3.emp_id')
-            ->join('tbl_department as dpt', 'pos.emp_department', '=', 'dpt.dept_id')
-            ->join('tbl_division as div', 'pos.emp_division', '=', 'div.division_id')
-            ->join('tbl_position as post', 'pos.emp_post', '=', 'post.pos_id')
-            ->where('pos.emp_id','=',$id)
-            ->get();
+        $employee = new Employee();
+        $emp_details = $employee->details($id);
         
         $attendance_total = Absen::where('abs_emp_id', '=', $id)->count('abs_id');
         $daily_attendance_total = Task::where('task_date', '=', $today)->where('task_assign_to','=', $id)->count('task_id');
-        $work_hour = DB::table('absen', 'abs')
-            ->select(
-                DB::raw('SEC_TO_TIME(SUM(TIME_TO_SEC(TIMEDIFF(absOut.abs_time, absIn.abs_time)))) as total_work_hour')
-            )
-            ->join('abs_in as absIn', 'abs.abs_in_id', '=', 'absIn.abs_in_id')
-            ->join('abs_out as absOut', 'abs.abs_out_id', '=', 'absOut.abs_out_id')
-            ->where('abs.abs_emp_id', '=', $id)
-            ->whereIn('abs.abs_date', [$start_of_Attendance,$end_of_Attendance])
-            ->value('total_work_hour');
+        
+        $work_hour = $absen->workHour($id,$start_of_Attendance,$end_of_Attendance);
 
-        return view('admin.employeedetails',[
-            'details' => $emp_details,
-            'attendance' => $attendance_total,
-            'daily_attendance' => $daily_attendance_total,
+        return view('admin.employeeDetails', [
+            'employee' => $emp_details,
+            'attendance_total' => $attendance_total,
+            'daily_attendance_total' => $daily_attendance_total,
             'work_hour' => $work_hour
         ]);
     }
-
-    public function employeeDetailsEdit(){
+        
+        public function employeeDetailsEdit(){
         return view('admin.employeedetailsedit');
     }
 
@@ -105,19 +85,105 @@ class AdmEmployeeController extends Controller
         ]);
     }
 
-    public function storeNewEmployee(Request $request){
-        $request->validate([
-            'emp_first_name' => 'required',
-            'emp_last_name' => 'required',
-            'username' => 'required',
-            'emp_birth_date' => 'required',
-            'emp_phone' => 'required',
-            // 'hired_date',
-            'emp_department' => 'required',
-            'emp_position' => 'required',
-            'emp_address' => 'required',
-            'emp_email_office' => 'required',
-            'user_pass' => 'required',
-        ]);
+    public function storeNewEmployee(StoreEmployeeRequest $request){
+        /*
+            Data yang tidak dimasukkan :
+            $request->username,
+            $request->hired_date,
+            $request->emp_address,
+        */ 
+       if($request->validated()){
+            $employee =  new Employee();
+            $employee->emp_full_name = $request->emp_first_name. " ". $request->emp_last_name;
+            $employee->emp_birth_date = $request->emp_birth_date;
+            $employee->emp_phone = $request->emp_phone;
+            $employee->emp_email_office = $request->emp_email_office;
+
+            if($employee->save()){
+                $emp_position = new EmpPost();
+                $emp_id = Employee::where('emp_email_office', 'LIKE', $request->emp_email_office)->pluck('emp_id')->latest()->first()->value();
+                $emp_position->emp_id = $emp_id;
+                $emp_position->emp_department = $request->emp_department;
+                $emp_position->emp_division = $request->emp_division;
+                $emp_position->emp_post = $request->emp_position;
+                $emp_position->emp_grade = NULL;
+                $emp_position->emp_coach = NULL;
+                $emp_position->em_status = NULL;
+                if($emp_position->save()){
+                    $users = new User();
+                    $users->emp_id = $emp_id;
+                    $users->user_name = $request->emp_email_office;
+                    $users->user_pass = $request->user_pass;
+                    $users->user_grade = NULL;
+                    if($users->save()){
+                        return redirect()->back()->with('Success', 'New Employee has been Added');
+                    }else{
+                        return redirect()->back()->with('Failed', 'Fail to add new Employee');
+                    }
+                }else{
+                    return redirect()->back()->with('Failed', 'Fail to add new Employee');
+                }
+            }else{
+                return redirect()->back()->with('Failed', 'Fail to add new Employee');
+            }
+       }
+    }
+
+    public function updateDataEmployee(UpdateEmployeeRequest $request,$emp_id){
+        if($request->validated()){
+            $data_updated = DB::update(
+                'UPDATE emp_position
+                INNER JOIN emp_person ON emp_position.emp_id = emp_person.emp_id
+                INNER JOIN tbl_users ON emp_position.emp_id = tbl_users.emp_id
+                SET 
+                    -- emp_person data for update
+                    emp_person.emp_full_name = ?,
+                    emp_person.emp_birth_date = ?,
+                    emp_person.emp_phone = ?,
+                    emp_person.emp_email_office = ?,
+                    -- emp_position data for update
+                    emp_position.emp_department = ?,
+                    emp_position.emp_division = ?,
+                    emp_position.emp_post = ?,
+                    emp_position.emp_grade = ?,
+                    emp_position.emp_coach = ?,
+                    emp_position.emp_manager = ?,
+                    emp_position.emp_status = ?,
+                    -- tbl_users data for updated
+                    tbl_users.user_name = ?,
+                    -- tbl_users.user_pass = ?,
+                    tbl_users.user_grade = ?
+
+                WHERE emp_id = ?', 
+                [
+                    // emp_person request data
+                    $request->emp_full_name,
+                    $request->emp_birth_date,
+                    $request->emp_phone,
+                    $request->emp_email_office,
+                    // emp_position request data
+                    $request->emp_department,
+                    $request->emp_division,
+                    $request->emp_position,
+                    $request->emp_grade,
+                    $request->emp_coach,
+                    $request->emp_manager,
+                    $request->emp_status,
+                    // tbl_users request data
+                    $request->emp_email_office,
+                    $request->emp_user_pass,
+                    $request->emp_grade,
+                    // condition for updated specific data
+                    $emp_id
+                ]
+            );
+            if($data_updated){
+                return redirect()->back()->with('Success', 'Employee Data has been Updated');
+            }else{
+                return redirect()->back()->with('Failed', 'Fail to update employee data');
+            }
+        }else{
+            return redirect()->back()->with('Failed', 'Fail to update employee data');
+        }
     }
 }

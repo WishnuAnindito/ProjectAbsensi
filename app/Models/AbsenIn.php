@@ -24,6 +24,30 @@ class AbsenIn extends Model
         return $this->belongsTo(Employee::class, 'abs_emp_id', 'emp_id');
     }
 
+    public function attendanceToday($require = 'data', $today = 'now'){
+        if($require === 'total'){
+            return AbsenIn::where('abs_date', '=', $today)->count();
+        }else{
+            return AbsenIn::where('abs_date', '=', $today)->get();
+        }
+    }
+
+    public function onTimeEmployeeDaily($require = 'data', $today = 'now'){
+        if($require === 'total'){
+            return AbsenIn::where('status_check_in', 'like', 'On Time')->where('abs_date', '=', $today)->count('abs_in_id');
+        }else{
+            return AbsenIn::where('status_check_in', 'like', 'On Time')->where('abs_date', '=', $today)->get();
+        }
+    }
+
+    public function lateTimeEmployeeDaily($require = 'data', $today = 'now'){
+        if($require === 'total'){
+            return AbsenIn::where('status_check_in', 'like', 'Late')->where('abs_date', '=', $today)->count('abs_in_id');
+        }else{
+            return AbsenIn::where('status_check_in', 'like', 'Late')->where('abs_date', '=', $today)->get();
+        }
+    }
+
     protected $fillable = [
         'abs_emp_id',
         'abs_date',

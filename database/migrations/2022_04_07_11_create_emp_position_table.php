@@ -19,10 +19,10 @@ return new class extends Migration
             $table->foreignId('emp_department');
             $table->foreignId('emp_division');
             $table->foreignId('emp_post');
-            $table->foreignId('emp_grade');
-            $table->foreignId('emp_coach');
-            $table->foreignId('emp_manager');
-            $table->integer('emp_status');
+            $table->foreignId('emp_grade')->nullable();
+            $table->foreignId('emp_coach')->nullable();
+            $table->foreignId('emp_manager')->nullable();
+            $table->integer('emp_status')->nullable();
 
             // Foreign Key
             $table->foreign('emp_id')->references('emp_id')->on('emp_person')->onDelete('cascade');

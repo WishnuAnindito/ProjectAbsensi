@@ -41,7 +41,7 @@
                 <a href="{{route('weekly-report-admin')}}">Report</a>
             </li>
       </ul>
-      <div class="fixed-bottom">
+      <div class="fixed-bottom" style="width: 10%">
           <form action="{{route('logout')}}" method="POST">
             @csrf
             <button type="submit" class="btn text-white">

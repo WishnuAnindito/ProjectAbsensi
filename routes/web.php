@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Leader\LeaderController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\Mail\MailController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*

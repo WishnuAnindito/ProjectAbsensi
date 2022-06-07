@@ -12,7 +12,8 @@ class LoginController extends Controller
     public function index()
     {
         // Pergi ke halaman Login
-        return redirect()->route('index');
+        // return redirect()->route('index');
+        return redirect()->route('/');
     }
 
     public function customLogin(Request $request){
@@ -27,10 +28,12 @@ class LoginController extends Controller
             'user_name' => $request->user_name,
             'password' => $request->user_pass
         ];
-        // dd($credentials);
+
         // Validasi akun dengan database
-        // dd(Auth::attempt($credentials));
+        // dd(Auth::login($credentials));
+
         if(Auth::attempt($credentials)){
+            // dd(Auth::user());
             $grade = Auth::user()->user_grade;
             // Pengecekan user admin atau bukan
             if($grade == 1){
@@ -41,12 +44,13 @@ class LoginController extends Controller
                 return redirect()->route('dashboard-leader')->with('Success','Signed In');
             }
             // pergi kehalaman dashboard untuk teknisi
-            return redirect()->route('dashboard')->with('Success','Signed In');
+            return redirect()->route('dashboard-employee')->with('Success','Signed In');
         }
         // Data yang diinput tidak sesuai
         return back()
                 ->withInput()
                 ->withErrors(['Error', 'Login details are not valid']);   
+        // echo "Login Gagal";
     }
 
     public function logout(){

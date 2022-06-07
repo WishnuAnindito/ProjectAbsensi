@@ -57,27 +57,6 @@ class Employee extends Model
         return $this->hasOne(User::class);
     }
 
-    public function dept_and_div(){
-        $teknisiDD = DB::select('
-            SELECT emp_position.emp_pos_id, tbl_department.dept_name,tbl_division.division_name, tbl_position.pos_name
-            FROM `emp_position`
-            JOIN tbl_users ON emp_position.emp_id = tbl_users.user_id
-            JOIN tbl_department ON emp_position.emp_department = tbl_department.dept_id
-            JOIN tbl_division ON emp_position.emp_department = tbl_division.division_id
-            JOIN tbl_position ON emp_position.emp_position = tbl_position.pos_id
-            WHERE tbl_users.user_grade < ?', [3]);
-        return $teknisiDD;
-    }
-
-    public function leader(){
-        $leader = DB::select('
-            SELECT emp_position.emp_pos_id, emp_position.emp_coach, emp_position.emp_manager, tbl_users.user_grade 
-            FROM `emp_position`
-            JOIN tbl_users ON emp_position.emp_id = tbl_users.user_id
-            WHERE tbl_users.user_grade < ?', [3]);
-        return $leader;
-    }
-
     public function details($emp_id){
         $emp_details = DB::table('emp_position', 'pos')
             ->select(
@@ -101,6 +80,18 @@ class Employee extends Model
         return $emp_details;
     }
 
+    // CRUD
+    public function insertData($request){
+
+    }
+
+    public function updateData($request,$emp_id){
+
+    }
+
+    public function deleteData($emp_id){
+        $delete = '';
+    }
     protected $fillable = [
         'emp_full_name',
         'emp_birth_date',

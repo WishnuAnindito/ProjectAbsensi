@@ -33,8 +33,7 @@ Route::get('/send-email', [MailController::class, 'sendEmail']);
 // Admin Controller
 Route::controller(AdmAttendanceController::class)->group(function () {
     // Dashboard
-    Route::get('/admin/dashboard', 'adminDashboard')->name('dashboard-admin');
-    // ->middleware('auth');
+    Route::get('/admin/dashboard', 'adminDashboard')->name('dashboard-admin')->middleware('auth');
 
     // All List
     Route::get('/admin/ontimelist', 'onTimeEmployee')->name('on-time-admin');
@@ -74,12 +73,18 @@ Route::controller(LeaderController::class)->group(function () {
 
 Route::controller(EmpAttendanceController::class)->group(function (){
     Route::get('/employee/dashboard', 'employeeDashboardtest')->name('dashboard-employee');
+    Route::get('/employee/profile', 'employeeProfile')->name('profile-employee');
+    Route::get('/employee/task', 'employeeTask')->name('task-employee');
+    Route::get('/employee/test', 'employeeDashboard');
 });
 
 // Page for Guest Only
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
-    Route::post('/login', [LoginController::class, 'customLogin'])->name('login');
+    // Auth::routes();
+    // Route::post('/login', [LoginController::class, 'customLogin'])->name('login-custom');
+
+    Route::post('/login', [LoginController::class, 'customLoginTest'])->name('login-custom');
 });
 
 // Page for Users who have registered or successfully logged in

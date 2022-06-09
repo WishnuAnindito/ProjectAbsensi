@@ -5,16 +5,16 @@
             <h3>PT. Tangara Mitrakom</h3>
         </div>     
         <ul class="list-unstyled components">
-            <li class="{{ request()->routeIs('dashboard-employee') ? 'active' : '' }}">
-                <a href="{{route('dashboard-employee')}}">Dashboard</a>
+            <li class="{{ request()->routeIs('dashboard-employee') ? 'active' : '' }} ms-4">
+                <a href="{{route('dashboard-employee')}}"><i class="fa-solid fa-house-chimney"></i>&ensp;Dashboard</a>
             </li>
-            {{-- <li class="{{ request()->routeIs('profile-employee') ? 'active' : '' }}">
-                <a href="{{route('profile-employee')}}">Profile</a>
+            <li class="{{ request()->routeIs('profile-employee') ? 'active' : '' }} ms-4">
+                <a href="{{route('profile-employee')}}"><i class="fa-solid fa-user-gear"></i>&ensp;Profile</a>
             </li>
-            <li class="{{ request()->routeIs('task-employee') ? 'active' : '' }}">
-                <a href="{{route('task-employee')}}">My Task</a>
+            <li class="{{ request()->routeIs('task-employee') ? 'active' : '' }} ms-4">
+                <a href="{{route('task-employee')}}"><i class="fa-solid fa-list-check"></i>&ensp;My Task</a>
             </li>
-            <li class="{{ request()->routeIs('attendance-employee') ? 'active' : '' }}">
+            {{-- <li class="{{ request()->routeIs('attendance-employee') ? 'active' : '' }}">
                 <a href="{{route('attendance-employee')}}">Presence</a>
             </li>
             <li class="{{ request()->routeIs('history-employee') ? 'active' : '' }}">

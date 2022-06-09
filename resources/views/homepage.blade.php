@@ -20,7 +20,7 @@
                 </div>
                 <h1 class="mb-4 text-center">Attendance Management System</h1>
                 <br> <br>
-                <form method="POST" action="{{route('login')}}">
+                <form method="POST" action="{{route('login-custom')}}">
                     @csrf
                     <div class="row mb-4">
                         <div class="col">

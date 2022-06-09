@@ -23,15 +23,25 @@ class EmpAttendanceController extends Controller
         $date = new Absen();
 
         $today = $date->getDate('today');
-        $emp_id = Auth::user()->emp_id;
+        // $emp_id = Auth::user()->emp_id;
         
-        $emp_details = $employee->details($emp_id);
+        // $emp_details = $employee->details($emp_id);
 
-        $task_employee = $task->dailyTask('data',$today,$emp_id);
-        return view('employee.dashboard', [
-            'details' => $emp_details,
-            'task' => $task_employee
-        ]);
+        // $task_employee = $task->dailyTask('data',$today,$emp_id);
+        $task_employee = $task->details(2);
+        dd($task_employee);
+        // return view('employee.dashboard', [
+        //     'details' => $emp_details,
+        //     'task' => $task_employee
+        // ]);
+    }
+
+    public function employeeProfile(){
+        return view('employee.profile');
+    }
+
+    public function employeeTask(){
+        return view('employee.task');
     }
 
     public function checkIn(StoreCheckInRequest $request, $task_id,$emp_id){

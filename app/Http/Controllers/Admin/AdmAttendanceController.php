@@ -47,6 +47,8 @@ class AdmAttendanceController extends Controller
         $data_employee = [$employee_total,$daily_task_total, $percentageOntime, $attendance_logs];
 
         return view('admin.dashboard', ['data' => $data_employee]);
+        // return redirect("login")->withSuccess('You are not allowed to access');
+        // return "Gagal Login";
     }
 
     public function attendanceDetailsTest(){

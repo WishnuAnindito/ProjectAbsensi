@@ -61,7 +61,7 @@ class AdmEmployeeController extends Controller
         
         $work_hour = $absen->workHour($id,$start_of_Attendance,$end_of_Attendance);
 
-        return view('admin.employeeDetails', [
+        return view('admin.employeedetails', [
             'employee' => $emp_details,
             'attendance_total' => $attendance_total,
             'daily_attendance_total' => $daily_attendance_total,

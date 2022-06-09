@@ -2,21 +2,18 @@
 
 namespace App\Models;
 
-// use Illuminate\Database\Eloquent\Model;
-// use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    // use Authenticatable;
-
+    
+    protected $table = 'tbl_users';
+    protected $connection = 'mysql';
+    
     public function employee()
     {
         return $this->belongsTo(Employee::class);
     }
-
-    protected $table = 'tbl_users';
-    protected $connection = 'mysql';
 
     protected $fillable = [
         'emp_id',

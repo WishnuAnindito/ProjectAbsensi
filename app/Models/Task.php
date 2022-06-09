@@ -51,12 +51,12 @@ class Task extends Model
                 'tsk.task_emp_status as status',
                 'absIn.abs_time as abs_in_time',
                 'absIn.status_check_in',
-                'absIn.abs_reason as summary',
+                'absIn.abs_reason as abs_in_summary',
                 'absOut.abs_time as abs_out_time',
                 'absOut.status_check_out',
                 DB::raw('TIMEDIFF(absIn.abs_time,tsk.task_start_time) as time_diff'),
                 DB::raw('TIMEDIFF(absOut.abs_time,tsk.task_end_time) as time_diff'),
-                'absOut.abs_reason as summary'
+                'absOut.abs_reason as abs_out_summary'
             )
             ->join('emp_position as emp1', 'abs.abs_emp_id', '=', 'emp1.emp_id')
             ->join('emp_person as emp2', 'emp1.emp_id', '=', 'emp2.emp_id') 

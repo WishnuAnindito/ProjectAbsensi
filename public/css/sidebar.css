@@ -99,8 +99,8 @@ a:focus {
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
-    color: #fff;
-    background: #65CBF2;
+    color: #041655;
+    background: #fff;
 }
 
 a[data-bs-toggle="colapse"] {

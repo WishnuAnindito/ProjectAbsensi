@@ -19,8 +19,8 @@
 @section('nav')
 @extends('layouts.navigation-bar-user')
 @section('content')
-{{dd(Auth::user())}}
-    <div class="container py-5" style="background-color: #C1D1D5">
+{{-- {{dd(Auth::user())}} --}}
+    <div class="container py-5" style="background-color: #C1D1D5; font-family: 'Inter', sans-serif;">
       <div class="row">
         <div class="col-sm-3">
           <img class="rounded-circle" src="{{Storage::url('images/yugioh.png')}}" alt="">
